@@ -18,6 +18,45 @@ moon_info lmonth_info[3];
 
 date_cal cur_time, cur_time_tz;
 int cur_time_sec;
+char saju[4][5];
+
+// 시간조견표 
+char *time_table[5][12] = 
+{
+	{"gaja","euch","byin","jemy","muji","gisa","gyoh","simi","imsi","geyu","gasu","euha"},
+	{"byja","jech","muin","gimy","gyji","sisa","imoh","gemi","gasi","euyu","bysu","jeha"},
+	{"muja","gich","gyin","simy","imji","gesa","gaoh","eumi","bysi","jeyu","musu","giha"},
+	{"gyja","sich","imin","gemy","gaji","eusa","byoh","jemi","musi","giyu","gysu","siha"},
+	{"imja","gech","gain","eumy","byji","jesa","muoh","gimi","gysi","siyu","imsu","geha"}
+};
+
+// 십이운성
+char *twelve_star[8][12] =
+{
+	{"gl","jy","so","by","sa","mo","je","ta","ya","js","my","gd"},
+	{"jy","gl","gd","my","js","ya","ta","je","mo","sa","by","so"},
+	{"js","my","gd","gl","jy","so","by","sa","mo","je","ta","ya"},
+	{"sa","by","so","jy","gl","gd","my","js","ya","ta","je","mo"},
+	{"je","ta","ya","js","my","gd","gl","jy","so","by","sa","mo"},
+	{"ta","je","mo","sa","by","so","jy","gl","gd","my","js","ya"},
+	{"by","sa","mo","je","ta","ya","js","my","gd","gl","jy","so"},
+	{"my","js","ya","ta","je","mo","sa","by","so","jy","gl","gd"}
+};
+
+// 천간의 육신 조견표
+char *six_sin[10][10] =
+{
+	{"bg","gj","ss","sg","pj","jj","pg","jg","pi","ji"},
+	{"gj","bg","sg","ss","jj","pj","jg","pg","ji","pi"},
+	{"pi","ji","bg","gj","ss","sg","pj","jj","pg","jg"},
+	{"ji","pi","gj","bg","sg","ss","jj","pj","jg","pg"},
+	{"pg","ji","pi","ji","bg","gj","ss","sg","pj","jj"},
+	{"jg","pg","ji","pi","gj","bg","sg","ss","jj","pj"},
+	{"pj","jj","pg","jg","pi","ji","bg","gj","ss","sg"},
+	{"jj","pj","jg","pg","ji","pi","gj","bg","sg","ss"},
+	{"ss","sg","pj","jj","pg","jg","pi","ji","bg","gj"},
+	{"sg","ss","jj","pj","jg","pg","ji","pi","gj","bg"}
+};
 
 void check_planet_event_month(int wbyear, int wbmonth, int time_offset_chkevent)
 {
@@ -147,11 +186,15 @@ void print_input_form()
 	int i;
 	int year;
 	int month;
-
+	int hour;
+	int minute;
 	//사용자 입력
 	year = 2022;
 	month = 4;
 	day = 5;
+	hour = 17;
+	minute = 45;
+	
 }
 
 void print_body_first()
@@ -392,6 +435,10 @@ void print_month_table()
 	int line;
 	printf("year=%d month=%d day=%d\n", year, month, day);
 	printf("year=%s month=%s ",ganji[mid_gi_8.so24year],ganji[mid_gi_8.so24month]);
+
+	strncpy(saju[0],ganji[mid_gi_8.so24year],4);
+	strncpy(saju[1],ganji[mid_gi_8.so24month],4);
+
 	for(line=1;line<7;line++)
 	{
 		if ((line==6)&&(date_set==false)) break;
@@ -440,19 +487,235 @@ void print_month_table()
 				if (jd<2299161)
 				{
 					date_cal jddate=getjuliandate_from_julianday(jd);
-					printf("jddate.month=%d jddate.day=%d\n");
+					//printf("jddate.month=%d jddate.day=%d\n");
 				}
 				//if (day==month_lastday) date_set=false;
 			}
 		}
 	}
 	printf("day=%s\n", ganji[day_value[day-1][TYPE_S60_Day]] );
+	strncpy(saju[2], ganji[day_value[day-1][TYPE_S60_Day]], 4);
 }
 
 void print_month_info()
 {
 	printf("this month first=%s\n",get_string_time_local(smonth_info[1].ingi.date,timez_off));
 	printf("this month middle=%s\n",get_string_time_local(smonth_info[1].mingi.date,timez_off));
+}
+
+void print_time_table()
+{
+	char id[3]; // 일천간
+	int id_x;
+	int id_y;
+	int hour;
+	int minute;
+	int temp;
+
+	// 사용자 입력
+	hour = 18;
+	minute = 45;
+
+	strncpy(id, ganji[day_value[day-1][TYPE_S60_Day]], 2);
+	if (hour == 23)
+	{
+		if (minute < 30)
+			id_y = 11;
+		else
+			id_y = 0;
+	}
+	else
+	{
+		temp = hour * 60 + minute;
+		if (temp >= 0 && temp < 90)
+			id_y = 0;
+		if (temp >= 90 && temp < 210)
+			id_y = 1;
+		if (temp >= 210 && temp < 330)
+			id_y = 2;
+		if (temp >= 330 && temp < 450)
+			id_y = 3;
+		if (temp >= 450 && temp < 570)
+			id_y = 4;
+		if (temp >= 570 && temp < 690)
+			id_y = 5;
+		if (temp >= 690 && temp < 810)
+			id_y = 6;
+		if (temp >= 810 && temp < 930)
+			id_y = 7;
+		if (temp >= 930 && temp < 1050)
+			id_y = 8;
+		if (temp >= 1050 && temp < 1170)
+			id_y = 9;
+		if (temp >= 1170 && temp < 1290)
+			id_y = 10;
+		if (temp >= 1290 && temp < 1380) //11시 전까지
+			id_y = 11;
+	}
+	if (!strcmp(id,"ga") || !strcmp(id,"gi"))
+		id_x = 0;
+	if (!strcmp(id,"eu") || !strcmp(id,"gy"))
+		id_x = 1;
+	if (!strcmp(id,"by") || !strcmp(id,"si"))
+		id_x = 2;
+	if (!strcmp(id,"ge") || !strcmp(id,"im"))
+		id_x = 3;
+	if (!strcmp(id,"mu") || !strcmp(id,"ge"))
+		id_x = 4;
+	printf("time=%s\n", time_table[id_x][id_y]);
+	strncpy(saju[3], time_table[id_x][id_y], 4);
+}
+
+void print_twelve_star()
+{
+	char id[3]; // 일천간
+	char zz[4][3];
+	int id_x;
+	int id_y;
+	strncpy(id, saju[2], 2);
+	if (!strcmp(id, "ga"))
+		id_x = 0;
+	if (!strcmp(id, "eu"))
+		id_x = 1;
+	if (!strcmp(id, "by") || !strcmp(id, "mu"))
+		id_x = 2;
+	if (!strcmp(id, "je") || !strcmp(id, "gi"))
+		id_x = 3;
+	if (!strcmp(id, "gy"))
+		id_x = 4;
+	if (!strcmp(id, "si"))
+		id_x = 5;
+	if (!strcmp(id, "im"))
+		id_x = 6;
+	if (!strcmp(id, "ge"))
+		id_x = 7;
+	
+	printf("twelve star=\n");
+	for(int i=0;i<4;i++)
+	{
+		strncpy(zz[i], saju[i]+2, 2);
+		zz[i][2] = '\0';
+		if (!strcmp(zz[i], "in"))
+			id_y = 0;
+		if (!strcmp(zz[i], "my"))
+			id_y = 1;
+		if (!strcmp(zz[i], "ji"))
+			id_y = 2;
+		if (!strcmp(zz[i], "sa"))
+			id_y = 3;
+		if (!strcmp(zz[i], "oh"))
+			id_y = 4;
+		if (!strcmp(zz[i], "mi"))
+			id_y = 5;
+		if (!strcmp(zz[i], "si"))
+			id_y = 6;
+		if (!strcmp(zz[i], "yu"))
+			id_y = 7;
+		if (!strcmp(zz[i], "su"))
+			id_y = 8;
+		if (!strcmp(zz[i], "ha"))
+			id_y = 9;
+		if (!strcmp(zz[i], "ja"))
+			id_y = 10;
+		if (!strcmp(zz[i], "ch"))
+			id_y = 11;
+		printf("%s ", twelve_star[id_x][id_y]);
+	}
+	printf("\n");
+}
+
+int six_sin_x(char id[])
+{
+	int id_x;
+
+	if (!strcmp(id, "ga"))
+		id_x = 0;
+	if (!strcmp(id, "eu"))
+		id_x = 1;
+	if (!strcmp(id, "by"))
+		id_x = 2;
+	if (!strcmp(id, "je"))
+		id_x = 3;
+	if (!strcmp(id, "mu"))
+		id_x = 4;
+	if (!strcmp(id, "gi"))
+		id_x = 5;
+	if (!strcmp(id, "gy"))
+		id_x = 6;
+	if (!strcmp(id, "si"))
+		id_x = 7;
+	if (!strcmp(id, "im"))
+		id_x = 8;
+	if (!strcmp(id, "ge"))
+		id_x = 9;
+	return (id_x);
+}
+
+int six_sin_y(char id[])
+{
+	int id_y;
+
+	if (!strcmp(id, "ga") || !strcmp(id, "in"))
+		id_y = 0;
+	if (!strcmp(id, "eu") || !strcmp(id, "my"))
+		id_y = 1;
+	if (!strcmp(id, "by") || !strcmp(id, "sa"))
+		id_y = 2;
+	if (!strcmp(id, "je") || !strcmp(id, "oh"))
+		id_y = 3;
+	if (!strcmp(id, "mu") || !strcmp(id, "ji") || !strcmp(id, "su"))
+		id_y = 4;
+	if (!strcmp(id, "gi") || !strcmp(id, "ch") || !strcmp(id, "mi"))
+		id_y = 5;
+	if (!strcmp(id, "gy") || !strcmp(id, "si"))
+		id_y = 6;
+	if (!strcmp(id, "si") || !strcmp(id, "yu"))
+		id_y = 7;
+	if (!strcmp(id, "im") || !strcmp(id, "ha"))
+		id_y = 8;
+	if (!strcmp(id, "ge") || !strcmp(id, "ja"))
+		id_y = 9;
+	return (id_y);
+}
+
+void print_six_sin()
+{
+	char id1[3];
+	char id2[3];
+	int id_x;
+	int id_y;
+	int i;
+
+	strncpy(id1, saju[2], 2); //일천간
+	id_x = six_sin_x(id1);
+	printf("six sin=\n");
+	for (i=0; i<4;i++) //일천+지지4개
+	{
+		strncpy(id2, saju[i]+2, 2);
+		id2[2] = '\0';
+		id_y = six_sin_y(id2);
+		printf("%s ", six_sin[id_x][id_y]);
+	}
+	printf("\n");
+	for (i=0;i<2;i++) //일천+년천,월천
+	{
+		strncpy(id2, saju[i], 2);
+		id2[2] = '\0';
+		id_y = six_sin_y(id2);
+		printf("%s ", six_sin[id_x][id_y]);
+	}
+	strncpy(id2, saju[3], 2); //일천+시천
+	id2[2] = '\0';
+	id_y = six_sin_y(id2);
+	printf("%s ", six_sin[id_x][id_y]);
+
+	strncpy(id1, saju[3], 2); //시천+년천
+	id1[2] = '\0';
+	id_x = six_sin_x(id1);
+	strncpy(id2, saju[0], 2);
+	id2[2] = '\0';
+	id_y = six_sin_y(id2);
+	printf("%s ", six_sin[id_x][id_y]);
 }
 
 int main()
@@ -498,6 +761,9 @@ int main()
 	print_body_first();
 	print_month_table();
 	print_month_info();
+	print_time_table();
+	print_twelve_star();
+	print_six_sin();
 	return(0);
 
 }
