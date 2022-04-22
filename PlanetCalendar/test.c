@@ -11,14 +11,15 @@
 #include "cal20000_calculation_type.h"
 #include "cal_calculation.h"
 
-int year,month,day,timez_off,lang;
+int year,month,day,timez_off,lang,hour,minute,gender;
 int day_value[31][26];
-so24term_month smonth_info[2];
+so24term_month smonth_info[2],umonth_info[2];
 moon_info lmonth_info[3];
 
 date_cal cur_time, cur_time_tz;
 int cur_time_sec;
 char saju[4][5];
+int month_flag; // 이번달 절입을 지나지 않았으면 1
 
 // 시간조견표 
 char *time_table[5][12] = 
@@ -177,23 +178,17 @@ void check_planet_event_month(int wbyear, int wbmonth, int time_offset_chkevent)
 
 
 	} // for(int tmin=0;tmin<(local_duration+1);)
-
-
 }
 
 void print_input_form()
 {
-	int i;
-	int year;
-	int month;
-	int hour;
-	int minute;
 	//사용자 입력
-	year = 2022;
-	month = 4;
-	day = 5;
-	hour = 17;
-	minute = 45;
+	year = 1999;
+	month = 3;
+	day = 2;
+	hour = 15;
+	minute = 25;
+	gender = 0; // 남자 1 여자 0
 	
 }
 
@@ -235,7 +230,7 @@ void print_body_first()
 void print_month_table()
 {
 
-	date_cal test_date1,test_date2;
+	date_cal test_date1,test_date2,before_date,next_date;
 
 	lunar_month lunar_date;
 
@@ -278,6 +273,30 @@ void print_month_table()
 	test_date1.hour=0;
 	test_date1.min=0;
 
+	// 이전달 절입, 다음달 절입 구하기
+	next_date.day=15;
+	next_date.hour=0;
+	next_date.min=0;
+	next_date.year=year;
+	next_date.month=month+1;
+	if (next_date.month == 13)
+	{
+		next_date.month = 1;
+		next_date.year += 1;
+	}
+	umonth_info[1]=SolortoSo24(next_date);
+	before_date.day=15;
+	before_date.hour=0;
+	before_date.min=0;
+	before_date.year=year;
+	before_date.month=month-1;
+	if (before_date.month == 0)
+	{
+		before_date.month = 12;
+		before_date.year -= 1;
+	}
+	umonth_info[0]=SolortoSo24(before_date);
+
 	smonth_info[0]=SolortoSo24(test_date1);  //양력1일날의 절기
 
     test_date1.year=year;
@@ -301,6 +320,36 @@ void print_month_table()
 	int lday=lmonth_info[lmv].moon_next_new.date.day;
 	int ingi_day=smonth_info[0].outgi.date.day;
 
+	//절입기준으로 월 다시 확인
+	int ingi_hour,ingi_min,ingi_temp,temp;
+	if (day == ingi_day)
+	{
+		ingi_hour = smonth_info[1].ingi.date.hour;
+		ingi_min = smonth_info[1].ingi.date.min;
+		ingi_temp = ingi_hour*60 + ingi_min;
+		temp = hour*60 + minute;
+		if (temp < ingi_temp)
+		{
+			smonth_info[1].mingi.date.month -= 1;
+			if (smonth_info[1].mingi.date.month == 0)
+			{
+				smonth_info[1].mingi.date.year -= 1;
+				smonth_info[1].mingi.date.month = 12;
+			}
+			month_flag = 1;
+		}
+	}
+	if (day < ingi_day)
+	{
+		smonth_info[1].mingi.date.month -= 1;
+		if (smonth_info[1].mingi.date.month == 0)
+		{
+			smonth_info[1].mingi.date.year -= 1;
+			smonth_info[1].mingi.date.month = 12;
+		}
+		month_flag = 1;
+	}
+	
 	int dd;
 	for(dd=0;dd<month_lastday;dd++)
 	{
@@ -493,30 +542,31 @@ void print_month_table()
 			}
 		}
 	}
-	printf("day=%s\n", ganji[day_value[day-1][TYPE_S60_Day]] );
+	printf("day=%s ", ganji[day_value[day-1][TYPE_S60_Day]] );
 	strncpy(saju[2], ganji[day_value[day-1][TYPE_S60_Day]], 4);
 }
 
+/*
 void print_month_info()
 {
+	//printf("this month middle=%s\n",get_string_time_local(smonth_info[1].mingi.date,timez_off));
+	//ingi_day=smonth_info[0].outgi.date.day;
+	//이번달 절입, 이전달 절입, 다음달 절입
 	printf("this month first=%s\n",get_string_time_local(smonth_info[1].ingi.date,timez_off));
-	printf("this month middle=%s\n",get_string_time_local(smonth_info[1].mingi.date,timez_off));
+	printf("before month first= %s\n", get_string_time_local(umonth_info[0].ingi.date,timez_off));
+	printf("next month first= %s\n", get_string_time_local(umonth_info[1].ingi.date,timez_off));
 }
+*/
 
 void print_time_table()
 {
 	char id[3]; // 일천간
 	int id_x;
 	int id_y;
-	int hour;
-	int minute;
 	int temp;
 
-	// 사용자 입력
-	hour = 18;
-	minute = 45;
-
-	strncpy(id, ganji[day_value[day-1][TYPE_S60_Day]], 2);
+	strncpy(id, saju[2], 2);
+	id[2] = '\0';
 	if (hour == 23)
 	{
 		if (minute < 30)
@@ -573,6 +623,7 @@ void print_twelve_star()
 	int id_x;
 	int id_y;
 	strncpy(id, saju[2], 2);
+	id[2] ='\0';
 	if (!strcmp(id, "ga"))
 		id_x = 0;
 	if (!strcmp(id, "eu"))
@@ -590,7 +641,7 @@ void print_twelve_star()
 	if (!strcmp(id, "ge"))
 		id_x = 7;
 	
-	printf("twelve star=\n");
+	printf("<twelve star>\n");
 	for(int i=0;i<4;i++)
 	{
 		strncpy(zz[i], saju[i]+2, 2);
@@ -687,8 +738,9 @@ void print_six_sin()
 	int i;
 
 	strncpy(id1, saju[2], 2); //일천간
+	id1[2] = '\0';
 	id_x = six_sin_x(id1);
-	printf("six sin=\n");
+	printf("<six sin>\n");
 	for (i=0; i<4;i++) //일천+지지4개
 	{
 		strncpy(id2, saju[i]+2, 2);
@@ -718,12 +770,131 @@ void print_six_sin()
 	printf("%s ", six_sin[id_x][id_y]);
 }
 
+void print_great_fortune(int direction)
+{
+	int i;
+	int j;
+	char id1[3];
+	char id2[3];
+	char *gan[] = {"ga","eu","by","je","mu","gi","gy","si","im","ge"};
+	char *ji[] = {"ja","ch","in","my","ji","sa","oh","mi","si","yu","su","ha"};
+	int start1;
+	int start2;
+
+	strncpy(id1, saju[1], 2); //월천간
+	strncpy(id2, saju[1]+2, 2); //월지지
+	id1[2] = '\0';
+	id2[2] = '\0';
+	for (i=0; i<10; i++)
+	{
+		if (!strcmp(id1, gan[i]))
+			start1 = i;
+	}
+	for (i=0; i<12; i++)
+	{
+		if (!strcmp(id2, ji[i]))
+			start2 = i;
+	}
+	printf("<great fortune>\n");
+	if (direction) //순행
+	{
+		for (j=0;j<10;j++)
+		{
+			start1 += 1;
+			if (start1 == 10)
+				start1 = 0;
+			printf("%s ",gan[start1]);
+		}
+		printf("\n");
+		for (j=0;j<10;j++)
+		{
+			start2 += 1;
+			if (start2 == 12)
+				start2 = 0;
+			printf("%s ",ji[start2]);
+		}
+	}
+	else //역행
+	{
+		for (j=0;j<10;j++)
+		{
+			start1 -= 1;
+			if (start1 == -1)
+				start1 = 9;
+			printf("%s ",gan[start1]);
+		}
+		printf("\n");
+		for (j=0;j<10;j++)
+		{
+			start2 -= 1;
+			if (start2 == -1)
+				start2 = 11;
+			printf("%s ",ji[start2]);
+		}
+	}
+}
+
+int calculate_day(int y, int m, int d)
+{
+	int months[]={31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+	int i;
+    long total=0L;
+    total=(y-1)*365L+(y-1)/4-(y-1)/100+(y-1)/400;
+    if(!(y%4) && y%100 || !(y%400))
+        months[1]++;
+    for(i=0;i<m-1;i++)
+    total += months[i];
+    total+=d;
+    return total;
+}
+
+void calculate_great_foutune()
+{
+	char id[3];
+	int sign;
+	int direction;
+	int fortune_num; //대운수
+	double total;
+
+	strncpy(id, saju[0], 2); //년천간
+	id[2] = '\0';
+	if (!strcmp(id, "ga") || !strcmp(id, "by") || !strcmp(id, "mu") || !strcmp(id, "gy") || !strcmp(id, "im"))
+		sign = 1;
+	if (!strcmp(id, "eu") || !strcmp(id, "je") || !strcmp(id, "gi") || !strcmp(id, "si") || !strcmp(id, "ge"))
+		sign = 0;
+	if (sign) //양일때
+		direction = gender ? 1 : 0; //남자면 순행
+	else //음일때
+		direction = gender ? 0 : 1; //남자면 역행
+
+	if (direction) // 순행일때
+	{
+		if (month_flag)
+			total = calculate_day(smonth_info[1].ingi.date.year, smonth_info[1].ingi.date.month, smonth_info[1].ingi.date.day) - calculate_day(year, month, day);
+		else
+			total = calculate_day(umonth_info[1].ingi.date.year, umonth_info[1].ingi.date.month, umonth_info[1].ingi.date.day) - calculate_day(year, month, day);
+	}
+	else // 역행일때
+	{
+		if (month_flag)
+			total = calculate_day(year, month, day) - calculate_day(umonth_info[0].ingi.date.year, umonth_info[0].ingi.date.month, umonth_info[0].ingi.date.day);
+		else
+			total = calculate_day(year, month, day) - calculate_day(smonth_info[1].ingi.date.year, smonth_info[1].ingi.date.month, smonth_info[1].ingi.date.day);
+	}
+	total = total / 3.0;
+	fortune_num = (int)(total+0.5); //나누기3의 반올림
+	printf("\nfortune num = %d\n", fortune_num);
+	print_great_fortune(direction);
+}
+
 int main()
 {
 	//default
 	year=2016;
 	month=5;
 	timez_off=-540;
+	month_flag = 0;
 
 	time_t ltime;
 	struct tm *today,*gmt_time;
@@ -760,10 +931,11 @@ int main()
 
 	print_body_first();
 	print_month_table();
-	print_month_info();
+	//print_month_info();
 	print_time_table();
 	print_twelve_star();
 	print_six_sin();
+	calculate_great_foutune();
 	return(0);
 
 }
