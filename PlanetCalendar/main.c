@@ -20,15 +20,20 @@ date_cal cur_time, cur_time_tz;
 int cur_time_sec;
 char saju[4][5];
 int month_flag; // 이번달 절입을 지나지 않았으면 1
+char gf_gan[10][3];
+char gf_ji[10][3];
+char six_chin[8][3];
+char gf_six_gan[10][3];
+char gf_six_ji[10][3];
 
 // 시간조견표 
 char *time_table[5][12] = 
 {
-	{"gaja","euch","byin","jemy","muji","gisa","gyoh","simi","imsi","geyu","gasu","euha"},
-	{"byja","jech","muin","gimy","gyji","sisa","imoh","gemi","gasi","euyu","bysu","jeha"},
-	{"muja","gich","gyin","simy","imji","gesa","gaoh","eumi","bysi","jeyu","musu","giha"},
-	{"gyja","sich","imin","gemy","gaji","eusa","byoh","jemi","musi","giyu","gysu","siha"},
-	{"imja","gech","gain","eumy","byji","jesa","muoh","gimi","gysi","siyu","imsu","geha"}
+	{"gaja","euch","byin","jemy","muji","gisa","gyoh","snmi","imsi","geyu","gasu","euha"},
+	{"byja","jech","muin","gimy","gyji","snsa","imoh","gemi","gasi","euyu","bysu","jeha"},
+	{"muja","gich","gyin","snmy","imji","gesa","gaoh","eumi","bysi","jeyu","musu","giha"},
+	{"gyja","snch","imin","gemy","gaji","eusa","byoh","jemi","musi","giyu","gysu","snha"},
+	{"imja","gech","gain","eumy","byji","jesa","muoh","gimi","gysi","snyu","imsu","geha"}
 };
 
 // 십이운성
@@ -51,7 +56,7 @@ char *six_sin[10][10] =
 	{"gj","bg","sg","ss","jj","pj","jg","pg","ji","pi"},
 	{"pi","ji","bg","gj","ss","sg","pj","jj","pg","jg"},
 	{"ji","pi","gj","bg","sg","ss","jj","pj","jg","pg"},
-	{"pg","ji","pi","ji","bg","gj","ss","sg","pj","jj"},
+	{"pg","jg","pi","ji","bg","gj","ss","sg","pj","jj"},
 	{"jg","pg","ji","pi","gj","bg","sg","ss","jj","pj"},
 	{"pj","jj","pg","jg","pi","ji","bg","gj","ss","sg"},
 	{"jj","pj","jg","pg","ji","pi","gj","bg","sg","ss"},
@@ -182,14 +187,27 @@ void check_planet_event_month(int wbyear, int wbmonth, int time_offset_chkevent)
 
 void print_input_form()
 {
+	//default
+	year = 2022;
+	month = 4;
+	day = 7;
+	hour = 16;
+	minute = 30;
+	gender = 1; // 남자 1 여자 0
+
 	//사용자 입력
-	year = 1999;
-	month = 3;
-	day = 2;
-	hour = 15;
-	minute = 25;
-	gender = 0; // 남자 1 여자 0
-	
+	printf("year= ");
+	scanf("%d", &year);
+	printf("month= ");
+	scanf("%d", &month);
+	printf("day= ");
+	scanf("%d", &day);
+	printf("hour= ");
+	scanf("%d", &hour);
+	printf("minute= ");
+	scanf("%d", &minute);
+	printf("gender(m=1, f=0)= ");
+	scanf("%d", &gender);
 }
 
 void print_body_first()
@@ -482,7 +500,7 @@ void print_month_table()
 
 	int cell;
 	int line;
-	printf("year=%d month=%d day=%d\n", year, month, day);
+	//printf("year=%d month=%d day=%d\n", year, month, day);
 	printf("year=%s month=%s ",ganji[mid_gi_8.so24year],ganji[mid_gi_8.so24month]);
 
 	strncpy(saju[0],ganji[mid_gi_8.so24year],4);
@@ -606,7 +624,7 @@ void print_time_table()
 		id_x = 0;
 	if (!strcmp(id,"eu") || !strcmp(id,"gy"))
 		id_x = 1;
-	if (!strcmp(id,"by") || !strcmp(id,"si"))
+	if (!strcmp(id,"by") || !strcmp(id,"sn"))
 		id_x = 2;
 	if (!strcmp(id,"ge") || !strcmp(id,"im"))
 		id_x = 3;
@@ -634,13 +652,13 @@ void print_twelve_star()
 		id_x = 3;
 	if (!strcmp(id, "gy"))
 		id_x = 4;
-	if (!strcmp(id, "si"))
+	if (!strcmp(id, "sn"))
 		id_x = 5;
 	if (!strcmp(id, "im"))
 		id_x = 6;
 	if (!strcmp(id, "ge"))
 		id_x = 7;
-	
+	printf("-----------------------------\n");
 	printf("<twelve star>\n");
 	for(int i=0;i<4;i++)
 	{
@@ -693,7 +711,7 @@ int six_sin_x(char id[])
 		id_x = 5;
 	if (!strcmp(id, "gy"))
 		id_x = 6;
-	if (!strcmp(id, "si"))
+	if (!strcmp(id, "sn"))
 		id_x = 7;
 	if (!strcmp(id, "im"))
 		id_x = 8;
@@ -720,7 +738,7 @@ int six_sin_y(char id[])
 		id_y = 5;
 	if (!strcmp(id, "gy") || !strcmp(id, "si"))
 		id_y = 6;
-	if (!strcmp(id, "si") || !strcmp(id, "yu"))
+	if (!strcmp(id, "sn") || !strcmp(id, "yu"))
 		id_y = 7;
 	if (!strcmp(id, "im") || !strcmp(id, "ha"))
 		id_y = 8;
@@ -736,30 +754,33 @@ void print_six_sin()
 	int id_x;
 	int id_y;
 	int i;
+	int cnt;
 
 	strncpy(id1, saju[2], 2); //일천간
 	id1[2] = '\0';
 	id_x = six_sin_x(id1);
-	printf("<six sin>\n");
-	for (i=0; i<4;i++) //일천+지지4개
+	cnt = 0;
+	for (i=0; i<4; i++) //일천+지지4개
 	{
 		strncpy(id2, saju[i]+2, 2);
 		id2[2] = '\0';
 		id_y = six_sin_y(id2);
-		printf("%s ", six_sin[id_x][id_y]);
+		strncpy(six_chin[cnt], six_sin[id_x][id_y], 2);
+		six_chin[cnt++][3] = '\0';
 	}
-	printf("\n");
 	for (i=0;i<2;i++) //일천+년천,월천
 	{
 		strncpy(id2, saju[i], 2);
 		id2[2] = '\0';
 		id_y = six_sin_y(id2);
-		printf("%s ", six_sin[id_x][id_y]);
+		strncpy(six_chin[cnt], six_sin[id_x][id_y], 2);
+		six_chin[cnt++][3] = '\0';
 	}
 	strncpy(id2, saju[3], 2); //일천+시천
 	id2[2] = '\0';
 	id_y = six_sin_y(id2);
-	printf("%s ", six_sin[id_x][id_y]);
+	strncpy(six_chin[cnt], six_sin[id_x][id_y], 2);
+	six_chin[cnt++][3] = '\0';
 
 	strncpy(id1, saju[3], 2); //시천+년천
 	id1[2] = '\0';
@@ -767,7 +788,16 @@ void print_six_sin()
 	strncpy(id2, saju[0], 2);
 	id2[2] = '\0';
 	id_y = six_sin_y(id2);
-	printf("%s ", six_sin[id_x][id_y]);
+	strncpy(six_chin[cnt], six_sin[id_x][id_y], 2);
+	six_chin[cnt++][3] = '\0';
+	printf("-----------------------------\n");
+	printf("<six chin>\n");
+	for (i=4; i<8; i++)
+		printf("%s ", six_chin[i]);
+	printf("\n");
+	for(i=0; i<4; i++)
+		printf("%s ", six_chin[i]);
+	printf("\n-----------------------------");
 }
 
 void print_great_fortune(int direction)
@@ -776,7 +806,7 @@ void print_great_fortune(int direction)
 	int j;
 	char id1[3];
 	char id2[3];
-	char *gan[] = {"ga","eu","by","je","mu","gi","gy","si","im","ge"};
+	char *gan[] = {"ga","eu","by","je","mu","gi","gy","sn","im","ge"};
 	char *ji[] = {"ja","ch","in","my","ji","sa","oh","mi","si","yu","su","ha"};
 	int start1;
 	int start2;
@@ -795,7 +825,6 @@ void print_great_fortune(int direction)
 		if (!strcmp(id2, ji[i]))
 			start2 = i;
 	}
-	printf("<great fortune>\n");
 	if (direction) //순행
 	{
 		for (j=0;j<10;j++)
@@ -803,15 +832,16 @@ void print_great_fortune(int direction)
 			start1 += 1;
 			if (start1 == 10)
 				start1 = 0;
-			printf("%s ",gan[start1]);
+			strncpy(gf_gan[j], gan[start1], 2);
+			gf_gan[j][2] = '\0';
 		}
-		printf("\n");
 		for (j=0;j<10;j++)
 		{
 			start2 += 1;
 			if (start2 == 12)
 				start2 = 0;
-			printf("%s ",ji[start2]);
+			strncpy(gf_ji[j], ji[start2], 2);
+			gf_ji[j][2] = '\0';
 		}
 	}
 	else //역행
@@ -821,17 +851,24 @@ void print_great_fortune(int direction)
 			start1 -= 1;
 			if (start1 == -1)
 				start1 = 9;
-			printf("%s ",gan[start1]);
+			strncpy(gf_gan[j], gan[start1], 2);
+			gf_gan[j][2] = '\0';
 		}
-		printf("\n");
 		for (j=0;j<10;j++)
 		{
 			start2 -= 1;
 			if (start2 == -1)
 				start2 = 11;
-			printf("%s ",ji[start2]);
+			strncpy(gf_ji[j], ji[start2], 2);
+			gf_ji[j][2] = '\0';
 		}
 	}
+	printf("<great fortune>\n");
+	for (j=0; j<10; j++)
+		printf("%s ", gf_gan[j]);
+	printf("\n");
+	for (j=0; j<10; j++)
+		printf("%s ", gf_ji[j]);
 }
 
 int calculate_day(int y, int m, int d)
@@ -861,7 +898,7 @@ void calculate_great_foutune()
 	id[2] = '\0';
 	if (!strcmp(id, "ga") || !strcmp(id, "by") || !strcmp(id, "mu") || !strcmp(id, "gy") || !strcmp(id, "im"))
 		sign = 1;
-	if (!strcmp(id, "eu") || !strcmp(id, "je") || !strcmp(id, "gi") || !strcmp(id, "si") || !strcmp(id, "ge"))
+	if (!strcmp(id, "eu") || !strcmp(id, "je") || !strcmp(id, "gi") || !strcmp(id, "sn") || !strcmp(id, "ge"))
 		sign = 0;
 	if (sign) //양일때
 		direction = gender ? 1 : 0; //남자면 순행
@@ -884,8 +921,47 @@ void calculate_great_foutune()
 	}
 	total = total / 3.0;
 	fortune_num = (int)(total+0.5); //나누기3의 반올림
-	printf("\nfortune num = %d\n", fortune_num);
+	printf("\nnum = %d\n", fortune_num);
 	print_great_fortune(direction);
+}
+
+void great_six_chin()
+{
+	char id1[3];
+	char id2[3];
+	int id_x;
+	int id_y;
+	int i;
+	int cnt;
+
+	strncpy(id1, saju[2], 2); //일천간
+	id1[2] = '\0';
+	id_x = six_sin_x(id1);
+	cnt=0;
+	for (i=0; i<10; i++)
+	{
+		strncpy(id2, gf_gan[i], 2);
+		id2[2] = '\0';
+		id_y = six_sin_y(id2);
+		strncpy(gf_six_gan[cnt], six_sin[id_x][id_y], 2);
+		gf_six_gan[cnt++][3] = '\0';
+	}
+	cnt = 0;
+	for (i=0; i<10; i++)
+	{
+		strncpy(id2, gf_ji[i], 2);
+		id2[2] = '\0';
+		id_y = six_sin_y(id2);
+		strncpy(gf_six_ji[cnt], six_sin[id_x][id_y], 2);
+		gf_six_ji[cnt++][3] = '\0';
+	}
+	printf("\n-----------------------------\n");
+	for (i=0; i<10; i++)
+		printf("%s ", gf_six_gan[i]);
+	printf("\n");
+	for(i=0; i<10; i++)
+		printf("%s ", gf_six_ji[i]);
+	printf("\n-----------------------------");
 }
 
 int main()
@@ -936,6 +1012,7 @@ int main()
 	print_twelve_star();
 	print_six_sin();
 	calculate_great_foutune();
+	great_six_chin();
 	return(0);
 
 }

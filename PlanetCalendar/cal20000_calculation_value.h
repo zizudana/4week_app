@@ -89,7 +89,7 @@ char *monthst_eng[] =
 };
 
  char *gan[] =
-{"ga","eu","by","je","mu","gi","gy","si","im","ge"};
+{"ga","eu","by","je","mu","gi","gy","sn","im","ge"};
 
  char *ji[]  =
 {"ja","ch","in","my","ji","sa","oh","mi","si","yu","su","ha"};
@@ -154,38 +154,36 @@ char *st_lunar_freeday_eng[]={"NewYear","Buddha Birth","Thanksgiving","EasterDay
 	{"je","eu","gi"},
 	
 	{"gi","im","gy"},
-	{"gy","si",""},
-	{"si","je","mu"},
+	{"gy","sn",""},
+	{"sn","je","mu"},
 	
 	{"mu","ga","im"},
 	{"im","ge",""},
-	{"ge","si","gi"}
+	{"ge","sn","gi"}
 };
 
  char *ganji[]  =
 {"gaja","euch","byin","jemy","muji",
-	"gisa","gyoh","simi","imsi","geyu",
+	"gisa","gyoh","snmi","imsi","geyu",
 	"gasu","euha","byja","jech","muin",
 	
-	"gimy","gyji","sisa","imoh","gemi",
+	"gimy","gyji","snsa","imoh","gemi",
 	"gasi","euyu","bysu","jeha","muja",
-	"gich","gyin","simy","imji","gesa",
+	"gich","gyin","snmy","imji","gesa",
 	
 	"gaoh","eumi","bysi","jeyu","musu",
-	"giha","gyja","sich","imin","gemy",
+	"giha","gyja","snch","imin","gemy",
 	"gaji","eusa","byoh","jemi","musi",
 	
-	"giyu","gysu","siha","imja","gech",
+	"giyu","gysu","snha","imja","gech",
 	"gain","eumy","byji","jesa","muoh",
-	"gimi","gysi","siyu","imsu","geha"};
+	"gimi","gysi","snyu","imsu","geha"};
 
  char *weekday[] = //{ "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일",nil };
 {"Sun","Mon","Tues","Wedne","Thurs","Fri","Satur"};
 
  char *weekday_Full[]  =
 {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
-
-
 
  char *s28day[]  =
 {"角","亢","氐","房","心","尾","箕",
