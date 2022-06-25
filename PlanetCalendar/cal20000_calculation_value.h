@@ -6,8 +6,6 @@
 //
 //
 
-
-
 #ifndef CAL20000_cal20000_calculation_value_h
 #define CAL20000_cal20000_calculation_value_h
 
@@ -30,8 +28,6 @@ unsigned short unitmmin =30;
 unsigned short unitmsec =0;
 int  moon_month_length= 42524 ; //{ =42524분 2.9초 }
 
-
-
 /*
  { 입춘시점에서 24절기의 시점까지의 길이 - 분 }
  {  yearmin := 525948.75 ; - 실제 1년길이 (분)
@@ -51,13 +47,13 @@ int  moon_month_length= 42524 ; //{ =42524분 2.9초 }
  "입추","처서","백로","추분","한로","상강",
  "입동","소설","대설","동지","소한","대한","입춘"};
  */
-
+/*
  char *monthst[] =
 {   "立春","雨水","驚蟄","春分","淸明","穀雨",
 	"立夏","小萬","芒種","夏至","小暑","大暑",
 	"立秋","處暑","白露","秋分","寒露","霜降",
 	"立冬","小雪","大雪","冬至","小寒","大寒","立春"};
-
+*/
 
 /*
  char *monthst_eng[] =
@@ -66,6 +62,7 @@ int  moon_month_length= 42524 ; //{ =42524분 2.9초 }
 	"New Fall","Hot end","White dew","Autumnal equinox","Cool dew","Frost",
 	"New Winter","Snow","Snowstorm","Winter solstice","Cold","Coldest","New Spring"};
 */
+/*
 char *monthst_eng[] =
 {"24-New Spring","24-Rain","24-Awake from hibernate","24-Spring equinox","24-clear and balmy","24-Good rain",
 	"24-New Summer","24-Good Season","24-Sow seed","24-Summer solstice","24-Hot","24-Hotest",
@@ -103,10 +100,6 @@ char *monthst_eng[] =
 
  char *gan_bg_color_white[] =
 {
-    /*
-	"greenColor","whiteColor","whiteColor","whiteColor","whiteColor",
-	"whiteColor","whiteColor","whiteColor","whiteColor","whiteColor"
-     */
     "greenColor","clearColor","clearColor","clearColor","clearColor",
 	"clearColor","clearColor","clearColor","clearColor","clearColor"
 
@@ -138,11 +131,6 @@ char *ji_bg_color_black[] =
 char *st_lunar_freeday_kr[]={"설날","부처님오신날","추석","부활절"};
 char *st_lunar_freeday_eng[]={"NewYear","Buddha Birth","Thanksgiving","EasterDay"};
 
-
-
-
-
-
  char *jijang[][3]  =
 {
 	{"gi","by","ga"}, //인월
@@ -161,7 +149,7 @@ char *st_lunar_freeday_eng[]={"NewYear","Buddha Birth","Thanksgiving","EasterDay
 	{"im","ge",""},
 	{"ge","sn","gi"}
 };
-
+*/
  char *ganji[]  =
 {"gaja","euch","byin","jemy","muji",
 	"gisa","gyoh","snmi","imsi","geyu",
@@ -178,7 +166,7 @@ char *st_lunar_freeday_eng[]={"NewYear","Buddha Birth","Thanksgiving","EasterDay
 	"giyu","gysu","snha","imja","gech",
 	"gain","eumy","byji","jesa","muoh",
 	"gimi","gysi","snyu","imsu","geha"};
-
+/*
  char *weekday[] = //{ "일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일",nil };
 {"Sun","Mon","Tues","Wedne","Thurs","Fri","Satur"};
 
@@ -195,7 +183,7 @@ char *st_lunar_freeday_eng[]={"NewYear","Buddha Birth","Thanksgiving","EasterDay
 {
 	"陽遁上元","陽遁中元","陽遁下元","陰遁上元","陰遁中元","陰遁下元","閏陽遁上元","閏陰遁上元","Error"
 };
-
+*/
  int gabja_day_v[] = {
 	0,6,3,8,2,5,0,8, -1
 };
@@ -203,7 +191,7 @@ char *st_lunar_freeday_eng[]={"NewYear","Buddha Birth","Thanksgiving","EasterDay
 /*
   char *kusung_gabja[] =
  { "양둔상원","양둔중원","양둔하원","음둔상원","음둔중원","음둔하원","윤양둔","윤음둔","Error" };
- */
+ 
  char *kusung_gabja[] =
 {
 	"陽遁上元","陽遁中元","陽遁下元","陰遁上元","陰遁中元","陰遁下元","閏陽遁","閏陰遁"
@@ -213,7 +201,7 @@ char *st_lunar_freeday_eng[]={"NewYear","Buddha Birth","Thanksgiving","EasterDay
 {
 	"上元","中元","下元"
 };
-
+*/
 //kimoon_yunkuk : array[0..57,0..1] of integer =  //(년도, 동지=1/하지=0)
  int kimoon_yunkuk[][2] =
 {
@@ -225,7 +213,7 @@ char *st_lunar_freeday_eng[]={"NewYear","Buddha Birth","Thanksgiving","EasterDay
 	{2016,0},{2019,0},{2021,1},{2024,1},{2027,1},{2030,1},{2033,1},{2036,0},{2039,0},{2042,0},
 	{2044,1},{2047,1},{2050,1},{2053,1}
 };
-
+/*
  char *kusung[][2]  =
 { {"一","白"},  {"二","黑"},  {"三","碧"},  {"四","綠"},  {"五","黃"},
 	{"六","白"},  {"七","赤"},  {"八","白"},  {"九","紫"} };
@@ -257,7 +245,7 @@ char *st_lunar_freeday_eng[]={"NewYear","Buddha Birth","Thanksgiving","EasterDay
 	"\n<font color=black style=\"BACKGROUND-COLOR: white\">八</font><font color=white style=\"BACKGROUND-COLOR: green\">四</font><font color=black style=\"BACKGROUND-COLOR: white\">六</font><br>\n<font color=white style=\"BACKGROUND-COLOR: red\">七</font><font color=white style=\"BACKGROUND-COLOR: BlueViolet \">九</font><font color=white style=\"BACKGROUND-COLOR: black\">二</font><br><font color=white style=\"BACKGROUND-COLOR: blue\">三</font><font color=black style=\"BACKGROUND-COLOR: yellow\">五</font><font color=black style=\"BACKGROUND-COLOR: white\">一</font>\n"
 	
 };
-
+*/
  int kimoon_kuk[][3]  =
 {
 	{8,5,2},{9,6,3},{1,7,4},  //입춘,우수,춘분
@@ -270,14 +258,13 @@ char *st_lunar_freeday_eng[]={"NewYear","Buddha Birth","Thanksgiving","EasterDay
 	{1,7,4},{2,8,5},{3,9,6} //동지,소한,대한
 };
 
-
  int month_kusung[][12] =  //month_kusung : array[0..2,0..11] of integer =
 {
 	{2,1,9,8,7,6,5,4,3,2,1,9},
 	{8,7,6,5,4,3,2,1,9,8,7,6},
 	{5,4,3,2,1,9,8,7,6,5,4,3}
 };
-
+/*
  char *kusung_color[] = //: array[0..8] of integer =
 {
 	"blackColor", "whiteColor", "whiteColor", "blackColor", "blackColor", "blackColor", "whiteColor", "blackColor", "whiteColor"
@@ -314,25 +301,8 @@ char *kusung_bg_color_black[] = //: array[0..8] of integer =
 	"المحرّم"
 	
 };
+*/
 /*
- 
- 1.Muḥarram — المحرّم — means "forbidden" in Arabic, so called because it was unlawful to fight during this month. Muharram is the second most sacred Muslim month, and includes the Day of Ashura.
- 2.Ṣafar — صفر — means "void" in Arabic, supposedly named because pagan Arabs looted during this month and left the houses empty.
- 3.Rabīʿ I (Rabīʿ al-Awwal) — ربيع الأوّل — means "the first Spring" in Arabic.
- 4.Rabīʿ II (Rabīʿ ath-Thānī or Rabīʿ al-Ākhir) — ربيع الآخر , ربيع الثاني — means "the second (or last) Spring" in Arabic.
- 5.Jumādā I (Jumādā al-Ūlā) — جمادى الأولى — means "the first month of parched land" in Arabic.
- 6.Jumādā II (Jumādā ath-Thāniya or Jumādā al-Ākhira) — جمادى الآخرة , جمادى الثانية — means "the second (or last) month of parched land" in Arabic.
- 7.Rajab — رجب — means "respect" or "honor" in Arabic. Rajab is another of the sacred months in which fighting was traditionally forbidden.
- 8.Shaʿbān — شعبان — means "scattered" in Arabic, marking the time of year when Arab tribes dispersed to find water.
- 9.Ramaḍān — رمضان — means "scorched" in Arabic. Ramadan is the most venerated month of the Hijri calendar, during which Muslims fast between dawn and sunset.
- 10.Shawwāl — شوّال — means "raised" in Arabic, as she-camels begin to raise their tails during this time of year, after giving birth.
- 11.Dhū al-Qaʿda — ذو القعدة — means "the one of truce" in Arabic. Dhu al-Qa'da was another month during which war was banned.
- 12.Dhū al-Ḥijja — ذو الحجّة — means "the one of pilgrimage" in Arabic, referring to the annual Muslim pilgrimage to Mecca, the Hajj.
- 
- 
- 
- */
-
  char *Hebrew_month_name[]=
 {
     "Tishrei",
@@ -351,7 +321,6 @@ char *kusung_bg_color_black[] = //: array[0..8] of integer =
 };
 
 
- /*
  char *St_moon_remark_type[] =
 {
 	"合朔<br>(New_Moon)",
@@ -367,7 +336,7 @@ char *kusung_bg_color_black[] = //: array[0..8] of integer =
 };
 
 */
-
+/*
  char *St_moon_remark_type[] =
 {
 		"합삭/초하루",
@@ -418,13 +387,13 @@ char *St_moon_eclipse_type_kor[] =
 
 char *Planet_event_string_kr[] = //for planet_event_result
 {
-    	    "","삭","망","승교점","강교점","근지점","원지점","상현","하현",/*@"유(서->동)"*/"유(역행종료)",/*@"유(동->서)"*/"유(역행시작)","내합","외합","합","충","최대이각(동)","최대이각(서)","서구","동구","행성합","달합","달충","절기","근일","원일","승황교점","강황교점"
+    	    "","삭","망","승교점","강교점","근지점","원지점","상현","하현","유(역행종료)","유(역행시작)","내합","외합","합","충","최대이각(동)","최대이각(서)","서구","동구","행성합","달합","달충","절기","근일","원일","승황교점","강황교점"
 };
 
 
 char *Planet_event_string_eng[] =
 {
-    	    "","New Moon","Full Moon","ascending node","descending node","perigee","apogee","first quarter","last quarter",/*@"유(서->동)"*/"stationary(finish retrograde)",/*@"유(동->서)"*/"stationary(start retrograde)","inferior conjunction","superior conjunction","conjunction","opposition","Greatest elongation(East)","Greatest elongation(West)","western quadrature","eastern quadrature","planet conjuction","Moon conjuction","Moon opposition","24 solar term","Perihelion","Aphelion","Ascending ecliptic","Descending ecliptic"
+    	    "","New Moon","Full Moon","ascending node","descending node","perigee","apogee","first quarter","last quarter","stationary(finish retrograde)","stationary(start retrograde)","inferior conjunction","superior conjunction","conjunction","opposition","Greatest elongation(East)","Greatest elongation(West)","western quadrature","eastern quadrature","planet conjuction","Moon conjuction","Moon opposition","24 solar term","Perihelion","Aphelion","Ascending ecliptic","Descending ecliptic"
 };
 
 
@@ -462,7 +431,7 @@ char *English_month_name[]=
 
 
 //13.09.21 add
-
+*/
 
 
 

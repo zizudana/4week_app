@@ -5,17 +5,12 @@
 //  Created by YOUNGCHANG KOH(fftkrr@gmail.com)
 //
 //
-
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
-
 #define Logi(...) ((void)printf(__VA_ARGS__))
-
 #include "cal20000_calculation_type.h"
 #include "cal20000_calculation_value.h"
-
-
 
 int lang_mode=0;
 int internal_calc_planet_current;
@@ -27,7 +22,6 @@ BOOL Planet_event_process_event[14];
 Planet_Position_instance_record calc_planet_position_calc[9];
 Planet_Position_instance_record planet_position[9][3];
 double moon_node[3],moon_perigee[3],moon_apogee[3],moon_distance[3];
-
 
 #define save_count 2048
 
@@ -46,23 +40,13 @@ int planet_event_result_planet2[devent_result_cap];
 Planet_Position_instance_record planet_event_result_position[devent_result_cap][9];
 int event_result_count;
 bool event_result_count_over;
-
-
 int event_sum;
-
-
-
-
 int depth_count;
 int execute_check_planet_event_count;
-
 bool chk_stationary_and_great_elong;
 bool chk_planet_events_not_stat_greatelong;
 
-
-
 char* get_string_time_local(date_cal time,int time_off);
-
 
 double degreelow(double d)
 {
@@ -112,7 +96,6 @@ double get_mean_sun_lon(double day)
 {  //1995-12-31 09:00 기준
 	return degreelow( day*0.98564736+278.956807);
 }
-
 
 double get_sun_nearest_lon( double day)
 {  //1995-12-31 09:00 기준
@@ -267,16 +250,11 @@ double moonsundegree(double day, int mode)
 			ret=ret-    9.884*cos(2*DD-2*sminangle);
 			ret=ret+    8.752*cos(2*DD            -mminangle-2*msdangle);
 		}
-
-
 		return ret;
-
-
 }
 
 double interpointdisp(double day)
 {
-
 	 return moonsundegree(day, T_Moon_Junction_distance);
 }
 
@@ -291,9 +269,6 @@ int moon_distance_rate(int distance)
 	int ret=(int)d;
 	return ret;
 }
-
-
-
 
 short disptimeday( int year, int month, int day)
 /* year의 1월 1일부터 year의 month월, day일까지의 날수계산 */
@@ -318,7 +293,6 @@ short disptimeday( int year, int month, int day)
 
 	  }
   }
-
   e = e + day;
   return e;
 }
@@ -326,7 +300,6 @@ short disptimeday( int year, int month, int day)
 int disp2days( int y1, int m1, int d1, int y2, int m2, int d2)
 /*y1,m1,d1일부터 y2,m2,d2까지의 일수 계산 */
 {
-
 	int p1; int p2; int p1n; int pp1; int pp2; int pr; int i; int dis; int ppp1; int ppp2;
 
   if(  y2 > y1 )
@@ -362,7 +335,6 @@ int disp2days( int y1, int m1, int d1, int y2, int m2, int d2)
 
     while(  ppp1 <= ppp2 )
     {
-
       if(  ( ppp1==-9000 ) && ( ppp2>1990 ) )
       {
         ppp1 = 1991;
@@ -468,8 +440,6 @@ int disp2days( int y1, int m1, int d1, int y2, int m2, int d2)
   return dis;
 }
 
-
-
 long long getminbytime_pre( int  uy, int  umm, int  ud, int  uh, int  umin,  int  y1,   int  mo1, int  d1, int  h1, int  mm1)
 {
   long long dispday,t;
@@ -484,7 +454,6 @@ long long getminbytime( int uy, int umm, int ud, int uh, int umin,int y1, int mo
 {
 	return getminbytime_pre(uy,umm,ud,uh,umin,y1,mo1,d1,h1,mm1);
 }
-
 
 void getdatebymin_pre( long long tmin,
                    int uyear,  int umonth, int uday, int uhour, int umin,
@@ -551,7 +520,6 @@ void getdatebymin_pre( long long tmin,
   }
 }
 
-
 date_cal getdatebymin(long long dmin,date_cal indate)
 {
 	date_cal ret;
@@ -581,8 +549,6 @@ double get_moon_node_lon( double day)
 	//1995-12-31 09:00 기준d
 	return degreelow( 202.489407-0.05295377*day);
 };
-
-
 
 void moon_perigee_calc( double day,double *degree, double *correct_day)
 {
@@ -621,10 +587,6 @@ void moon_perigee_calc( double day,double *degree, double *correct_day)
 
     mreal=degreelow( ml+md);//진황경
 
-
-
-
-
     //달과 태양의 평균이각
     D=M_PI*degreelow( 108.879777+12.19074912*day)/180;
     M=sminangle;
@@ -642,10 +604,7 @@ void moon_perigee_calc( double day,double *degree, double *correct_day)
     +0.0032*sin(20*D)-0.0032*sin(D+M)+0.0031*sin(16*D-M)-0.0029*sin(4*D+M)
     +0.0027*sin(9*D)+0.0027*sin(4*D+2*F)-0.0027*sin(2*D-2*M)+0.0024*sin(4*D-2*M)
     -0.0021*sin(6*D-2*M)-0.0021*sin(22*D);
-
-
 }
-
 
 double perigee_point( double day)
 {
@@ -672,7 +631,6 @@ double perigee_point( double day)
         {
             if (fabs(ddd)>(double)(20.0/1440.0)) nday=nday+ddd/2;
             else nday=nday-((double)1.0/1440.0);
-
         }
 
         moon_perigee_calc( nday,&perigee_lon,&corr_day);
@@ -686,10 +644,7 @@ double perigee_point( double day)
     }
 
     return perigee_lon;
-
-
 }
-
 
 void moon_apogee_calc( double day, double *degree, double *correct_day)
 {
@@ -726,7 +681,6 @@ void moon_apogee_calc( double day, double *degree, double *correct_day)
     +0.048889*sin(mminangle-sminangle)-0.129722*sin(2*msdangle)
     -0.011111*sin(2*msdangle-mminangle)-0.012778*sin(2*msdangle+mminangle);
 
-
     mreal=degreelow( ml+md);//진황경
 
     //달과 태양의 평균이각
@@ -742,8 +696,6 @@ void moon_apogee_calc( double day, double *degree, double *correct_day)
     +0.0212*sin(2*F)-0.0189*sin(D)+0.0144*sin(6*D)+0.0113*sin(4*D-M)+0.0047*sin(2*D+2*F)
     +0.0036*sin(D+M)+0.0035*sin(8*D)+0.0034*sin(6*D-M)-0.0034*sin(2*D-2*F)+0.0022*sin(2*D-2*M)
     -0.0017*sin(3*D);
-
-
 }
 
 double apogee_point( double day)
@@ -785,10 +737,7 @@ double apogee_point( double day)
     {
     	Logi("!!!!!apogee_point loop overflow");
     }
-
     return apogee_lon;
-
-
 }
 
 void moon_position(date_cal utime, double *moon_lat, double *moon_lon, double *ip, double *perigee, double *apogee, double *moon_distance)
@@ -820,9 +769,7 @@ void pr_planet_position(
           char **Name_Kor, char **Name_Han, char **Name_Eng,
            int *P_Color, int *loop_count
 		)
-
 {
-
     long long tmin;
     double  day,
         N,// : extended ; //승교점 위치 longitude of ascending node at date of elements
@@ -875,9 +822,6 @@ void pr_planet_position(
         E0=E1;
     }
 
-
-
-
     xv=a*(cos(M_PI*E0/180)-e);
     yv=a*(sqrt(1.0-e*e)*sin(M_PI*E0/180));
 
@@ -888,7 +832,6 @@ void pr_planet_position(
 
     if (Planet_number==0)
     {
-
     	*planet_lon=degreelow( v+w);
         *planet_x=r*cos(*planet_lon*M_PI/180);
         *planet_y=r*sin(*planet_lon*M_PI/180)*cos(ecl*M_PI/180);
@@ -901,7 +844,6 @@ void pr_planet_position(
 
         *planet_y=r*sin(degreelow( v+w)*M_PI/180);
         *planet_z=0;
-
     }
     else
     {
@@ -914,8 +856,6 @@ void pr_planet_position(
         *planet_lat=arctan2(*planet_z,sqrt(*planet_x*(*planet_x)+(*planet_y)*(*planet_y)) )*180/M_PI;
         *planet_radius=r;
     };
-
-
 
     //For perturbations
     M_perturbations=0;
@@ -959,7 +899,6 @@ void pr_planet_position(
             -0.46 * cos((2*D)*M_PI/180);
     };
 
-
     if (Planet_Orbit[Planet_number]->Number==5)  //JUPITER
     {
 
@@ -975,8 +914,6 @@ void pr_planet_position(
             +0.023*sin((2*Mj-3*Ms+52)*M_PI/180)
             -0.016*sin((Mj-5*Ms-69)*M_PI/180);
     };
-
-
 
     if (Planet_Orbit[Planet_number]->Number==6)  //SATURN
     {
@@ -994,8 +931,6 @@ void pr_planet_position(
             +0.018*sin((2*Mj-6*Ms-49)*M_PI/180);
     };
 
-
-
     if (Planet_Orbit[Planet_number]->Number==7)  //URANUS
     {
     	Mj= degreelow( Planet_Orbit[5]->mean_anomaly_initial_degree+Planet_Orbit[5]->mean_anomaly_period*day);
@@ -1007,14 +942,11 @@ void pr_planet_position(
         M_perturbations = +0.040*sin((Ms-2*Mu+6)*M_PI/180)
             +0.035*sin((Ms-3*Mu+33)*M_PI/180)
             -0.015*sin((Mj-Mu+20)*M_PI/180);
-
     };
 
     *planet_lon=*planet_lon+M_perturbations;
     *planet_lat=*planet_lat+L_perturbations;
     *planet_radius=*planet_radius+R_perturbations;
-
-
 
     if (Planet_Orbit[Planet_number]->Number==1)  //Moon
     {
@@ -1031,9 +963,7 @@ void pr_planet_position(
 
     };
 
-
     *earth_ecl=ecl;
-
 
     *Name_Kor=(char *)(Planet_Orbit[Planet_number]->Name_Kor);
     *Name_Han=(char *)(Planet_Orbit[Planet_number]->Name_Han);
@@ -1042,13 +972,11 @@ void pr_planet_position(
 
 }
 
-
 int compare_time_equal(date_cal time1, date_cal time2)
 {
     if ((time1.year==time2.year)&&(time1.month==time2.month)&&(time1.day==time2.day)&&(time1.hour==time2.hour)&&(time1.min==time2.min)) return 1;
     return 0;
 }
-
 
 void get_LamdaBeta_from_RADec(double RA, double Dec, double ecl, double *Ramda, double *Beta)
 {
@@ -1093,7 +1021,6 @@ void get_RADec_from_RamdaBeta( double Ramda, double Beta, double ecl, double *RA
 
 }
 
-
 void sort_event_result()
 {
 	int i,j,k;
@@ -1136,8 +1063,6 @@ void sort_event_result()
     }
 
 }
-
-
 
 //void put_event_to_result( int Type, int planet1, int planet2, Planet_Position_instance_record *position)
 void put_event_to_result( int Type, int planet1, int planet2, Planet_Position_instance_record position[])
@@ -1185,9 +1110,7 @@ void put_event_to_result( int Type, int planet1, int planet2, Planet_Position_in
             if (Type==en_opposition) return;
             if (Type==en_full_moon) return;
         }
-
     }
-
 
     if (event_result_count==devent_result_cap)
     {
@@ -1212,7 +1135,6 @@ void put_event_to_result( int Type, int planet1, int planet2, Planet_Position_in
         	if ((dd<3)&&(dd>-3))
         		return;
         }
-
     }
 
     planet_event_result[event_result_count]=Type;
@@ -1230,11 +1152,6 @@ void put_event_to_result( int Type, int planet1, int planet2, Planet_Position_in
 
 	sort_event_result();
 }
-
-
-
-
-
 
 void sun_position(date_cal utime,
         double *earth_lat,double *earth_lon, double *earth_radius,
@@ -1277,7 +1194,6 @@ void sun_position(date_cal utime,
     *earth_y = *earth_radius * sin( M_PI*(*earth_lon)/180 )* cos(*earth_ecl*M_PI/180);;
     *earth_z = *earth_radius * sin( M_PI*(*earth_lon)/180 )* sin(*earth_ecl*M_PI/180);;;
 }
-
 
 void calc_current_planet_position( date_cal current_time, double *moon_node, double *perigee, double *apogee, double *moon_distance)
 {
@@ -1448,10 +1364,7 @@ void calc_current_planet_position( date_cal current_time, double *moon_node, dou
 
 
 final_return: ;
-
-
 }
-
 
 void init_check_planet_event()
 {
@@ -1474,7 +1387,6 @@ void init_check_planet_event()
 			planet_event_result_position[i][j].time.min=0;
 		}
 	}
-
 }
 
 int check_planet_event( int planet_start_no)
@@ -3377,7 +3289,7 @@ char* get_string_time(date_cal time)
 	return get_string_time_ret;
 }
 
-
+/*
 char* get_Planet_event_string(int event)
 {
 	if (planet_event_result[event]==en_sun_julgi)
@@ -3521,7 +3433,7 @@ char* get_Planet_event_string_2nd(int event)
 
 	return "";
 }
-
+*/
 
 int get_equation_of_time(date_cal time)
 {

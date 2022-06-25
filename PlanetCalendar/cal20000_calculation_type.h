@@ -6,8 +6,6 @@
 //
 //
 
-
-
 #ifndef CAL20000_cal20000_calculation_type_h
 #define CAL20000_cal20000_calculation_type_h
 
@@ -196,12 +194,6 @@ typedef int BOOL;
 
  } stSTAR_DATA;
 
-
-
-
-
-
-
 //13.09.21 add
 typedef struct Planet_info
 {
@@ -251,7 +243,6 @@ enum T_Moon
 	T_Moon_Sol_lat=8,
 	T_Moon_lunar_lat=9
 };
-
 
 enum
 {

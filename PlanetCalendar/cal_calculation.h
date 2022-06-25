@@ -9,58 +9,28 @@
 #ifndef cal_calculation_h
 #define cal_calculation_h
 
-
 double degreelow(double d);
 double arctan2(double y, double x);
 double get_mean_sun_lon(double day);
-
-
 double get_sun_nearest_lon( double day);
-
-
 double moonsundegree(double day, int mode);
-
 double interpointdisp(double day);
-
 double moon_distance_double(double day);
-
-
 short disptimeday( int year, int month, int day);
-
 int disp2days( int y1, int m1, int d1, int y2, int m2, int d2);
-
-
-
-
 long long getminbytime_pre( int  uy, int  umm, int  ud, int  uh, int  umin,  int  y1,   int  mo1, int  d1, int  h1, int  mm1);
-
-
-
 long long getminbytime( int uy, int umm, int ud, int uh, int umin,int y1, int mo1, int d1, int h1, int mm1);
-
 void getdatebymin_pre( long long tmin,
                    int uyear,  int umonth, int uday, int uhour, int umin,
                    int *y1,  int *mo1, int *d1, int *h1, int *mi1);
 
 date_cal getdatebymin(long long dmin,date_cal indate);
-
 double get_mean_moon_lon( double day);
-
-
 double get_moon_nearest_lon( double day);
-
-
 double get_moon_node_lon( double day);
-
-
 void moon_perigee_calc( double day,double *degree, double *correct_day);
-
 double perigee_point( double day);
-
-
-
 void moon_apogee_calc( double day, double *degree, double *correct_day);
-
 
 double apogee_point( double day);
 void moon_position(date_cal utime, double *moon_lat, double *moon_lon, double *ip, double *perigee, double *apogee, double *moon_distance);
@@ -72,35 +42,16 @@ void pr_planet_position(
           char **Name_Kor, char **Name_Han, char **Name_Eng,
            int *P_Color, int *loop_count
 		);
-
-
 int compare_time_equal(date_cal time1, date_cal time2);
-
-
 void get_LamdaBeta_from_RADec(double RA, double Dec, double ecl, double *Ramda, double *Beta);
-
 void get_RADec_from_RamdaBeta( double Ramda, double Beta, double ecl, double *RA, double *Dec);
-
-
-
-
 void sort_event_result();
 void put_event_to_result( int Type, int planet1, int planet2, Planet_Position_instance_record *position);
-
-
-
-
-
-
 void sun_position(date_cal utime,
         double *earth_lat,double *earth_lon, double *earth_radius,
         double *earth_x, double *earth_y, double *earth_z,
         double *planet_true_anomaly,double *earth_ecl);
-
-
 void calc_current_planet_position( date_cal current_time, double *moon_node, double *perigee, double *apogee, double *moon_distance);
-
-
 void init_check_planet_event();
 
 int check_planet_event( int planet_start_no);
