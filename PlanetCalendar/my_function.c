@@ -46,7 +46,10 @@ void print_time_table()
 	int id_y;
 	int temp;
 
-	strncpy(id, saju[2], 2);
+	if (gender)
+		strncpy(id, saju2[2], 2);
+	else
+		strncpy(id, saju[2], 2);
 	id[2] = '\0';
 	if (hour == 23)
 	{
@@ -89,12 +92,15 @@ void print_time_table()
 		id_x = 1;
 	if (!strcmp(id,"by") || !strcmp(id,"sn"))
 		id_x = 2;
-	if (!strcmp(id,"ge") || !strcmp(id,"im"))
+	if (!strcmp(id,"je") || !strcmp(id,"im"))
 		id_x = 3;
 	if (!strcmp(id,"mu") || !strcmp(id,"ge"))
 		id_x = 4;
 	printf("time=%s\n", time_table[id_x][id_y]);
-	strncpy(saju[3], time_table[id_x][id_y], 4);
+	if (gender)
+		strncpy(saju2[3], time_table[id_x][id_y], 4);
+	else
+		strncpy(saju[3], time_table[id_x][id_y], 4);
 }
 
 
@@ -223,13 +229,19 @@ void print_six_sin()
 	int i;
 	int cnt;
 
-	strncpy(id1, saju[2], 2); //일천간
+	if (gender)
+		strncpy(id1, saju2[2], 2); //일천간
+	else
+		strncpy(id1, saju[2], 2);
 	id1[2] = '\0';
 	id_x = six_sin_x(id1);
 	cnt = 0;
 	for (i=0; i<4; i++) //일천+지지4개
 	{
-		strncpy(id2, saju[i]+2, 2);
+		if (gender)
+			strncpy(id2, saju2[i]+2, 2);
+		else
+			strncpy(id2, saju[i]+2, 2);
 		id2[2] = '\0';
 		id_y = six_sin_y(id2);
 		strncpy(six_chin[cnt], six_sin[id_x][id_y], 2);
@@ -237,22 +249,34 @@ void print_six_sin()
 	}
 	for (i=0;i<2;i++) //일천+년천,월천
 	{
-		strncpy(id2, saju[i], 2);
+		if (gender)
+			strncpy(id2, saju2[i], 2);
+		else
+			strncpy(id2, saju[i], 2);
 		id2[2] = '\0';
 		id_y = six_sin_y(id2);
 		strncpy(six_chin[cnt], six_sin[id_x][id_y], 2);
 		six_chin[cnt++][3] = '\0';
 	}
-	strncpy(id2, saju[3], 2); //일천+시천
+	if (gender)
+		strncpy(id2, saju2[3], 2); //일천+시천
+	else
+		strncpy(id2, saju[3], 2); //일천+시천
 	id2[2] = '\0';
 	id_y = six_sin_y(id2);
 	strncpy(six_chin[cnt], six_sin[id_x][id_y], 2);
 	six_chin[cnt++][3] = '\0';
 
-	strncpy(id1, saju[3], 2); //시천+년천
+	if (gender)
+		strncpy(id1, saju2[3], 2); //시천+년천
+	else
+		strncpy(id1, saju[3], 2); //시천+년천
 	id1[2] = '\0';
 	id_x = six_sin_x(id1);
-	strncpy(id2, saju[0], 2);
+	if (gender)
+		strncpy(id2, saju2[0], 2);
+	else
+		strncpy(id2, saju[0], 2);
 	id2[2] = '\0';
 	id_y = six_sin_y(id2);
 	strncpy(six_chin[cnt], six_sin[id_x][id_y], 2);

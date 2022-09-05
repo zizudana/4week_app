@@ -18,6 +18,7 @@ int main()
 	month=5;
 	timez_off=-540;
 	month_flag = 0;
+	flag = 0;
 
 	time_t ltime;
 	struct tm *today,*gmt_time;
@@ -51,16 +52,45 @@ int main()
 	print_body_first(); //input 실행
 	print_month_table(); // 일주계산, saju[2]
 	print_time_table(); // 시주계산, saju[3]
-	print_twelve_star();
+	//print_twelve_star();
 	print_six_sin();
-	calculate_great_foutune();
-	great_six_chin();
-	cal_type_sign(); // 양음 계산, type_sign
-	cal_type_gs(); // 관성 계산
+	//calculate_great_foutune();
+	//great_six_chin();
+	cal_type_sign(gender); // 양음 계산, type_sign
+	if (gender) //남자
+		cal_type_gs_m(); // 관성 계산
+	else //여자
+		cal_type_gs_w(); // 관성 계산
 	cal_type_hc(); // 합충 계산
 	cal_type_yn(); //민감도 계산
 	type_result = cal_type_result();
-	printf("\ntype = %d", type_result);
+	printf("\ntype = %d\n", type_result);
 
+	flag = 1;
+	print_body_first(); //input 실행
+	print_month_table(); // 일주계산, saju[2]
+	print_time_table(); // 시주계산, saju[3]
+	//print_twelve_star();
+	print_six_sin();
+	//calculate_great_foutune();
+	//great_six_chin();
+	cal_type_sign(gender); // 양음 계산, type_sign
+	if (gender) //남자
+		cal_type_gs_m(); // 관성 계산
+	else //여자
+		cal_type_gs_w(); // 관성 계산
+	cal_type_hc(); // 합충 계산
+	cal_type_yn(); //민감도 계산
+	type_result = cal_type_result();
+	printf("\ntype = %d\n", type_result);
+
+	cal_satis_jung();
+	cal_satis_dowha();
+	cal_satis_guin();
+	cal_satis_hc1();
+	cal_satis_hc2();
+	cal_satis_gh();
+	satis_result = cal_satis_result();
+	//printf("\nresult = %d", satis_result);
 	return(0);
 }
