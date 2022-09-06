@@ -109,7 +109,7 @@ void check_planet_event_month(int wbyear, int wbmonth, int time_offset_chkevent)
 	} // for(int tmin=0;tmin<(local_duration+1);)
 }
 
-void print_body_first()
+void print_body_first(int _gender, int _year, int _month, int _day, int _hours, int _minutes)
 {
 	int pyear,pmonth,nmonth,nyear;
 
@@ -141,7 +141,7 @@ void print_body_first()
 	if (less_year==-10000) less_year=-9999;
 	int more_year=year+1;
 	if (more_year==10000) less_year=9999;
-	print_input_form();
+	print_input_form(_gender, _year, _month, _day, _hours, _minutes);
 }
 
 void print_month_table()

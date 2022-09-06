@@ -33,7 +33,8 @@ int type_sign; //양(1) 음(0)
 int type_gs; //관성 mv(0) mi(1) mo(2) mn(3) me(4) ml(5) 
 int type_hc; //합(1) 충(0)
 int type_yn; //양(1) 음(0)
-int type_result; //2*6*2*2 (1~42)
+char* type_result1;
+char* type_result2; //2*6*2*2 (1~42)
 
 int satis_jung; // HA(0) AH(1) 2N(2) 2P(3)
 int satis_dowha; // MU(0) WM(1) MW(2) DN(3)
@@ -44,8 +45,8 @@ int satis_gh; //NBP(0) NCP(1) NGP(2) NNP(3)
 int satis_result;
 
 void check_planet_event_month(int wbyear, int wbmonth, int time_offset_chkevent);
-void print_input_form();
-void print_body_first();
+void print_input_form(int _gender, int _year, int _month, int _day, int _hours, int _minutes);
+void print_body_first(int _gender, int _year, int _month, int _day, int _hours, int _minutes);
 void print_month_table();
 void print_time_table();
 void print_twelve_star();
@@ -63,7 +64,7 @@ int is_cg_hc(char *id1, char *id2);
 int is_jj_hc(char *id1, char *id2);
 void cal_type_hc();
 void cal_type_yn();
-int cal_type_result();
+const char* cal_type_result();
 void cal_satis_jung();
 int is_dowha(char *w1, char *i1, char *w2, char *i2 );
 int is_guin(char *c, char *z1, char *z2);
@@ -73,4 +74,5 @@ void cal_satis_hc1();
 void cal_satis_hc2();
 void cal_satis_gh();
 int cal_satis_result();
+int _4week(int wgender, int wyear, int wmonth, int wday, int whours, int wminutes, int mgender, int myear, int mmonth, int mday, int mhours, int mminutes);
 #endif

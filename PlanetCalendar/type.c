@@ -1,6 +1,6 @@
 #include "main.h"
 
-void print_input_form()
+void print_input_form(int _gender, int _year, int _month, int _day, int _hours, int _minutes)
 {
 	//default
 	year = 2022;
@@ -11,7 +11,7 @@ void print_input_form()
 	gender = 0; // 남자 1 여자 0
 	int time_know = 0;
 
-	//사용자 입력
+	/*사용자 입력
 	printf("year= ");
 	scanf("%d", &year);
 	printf("month= ");
@@ -22,10 +22,18 @@ void print_input_form()
 	scanf("%d", &gender);
 	printf("know the time? 1 or 0");
 	scanf("%d", &time_know);
+	*/
+	gender = _gender;
+	year = _year;
+	month = _month;
+	day = _day;
+	hour = _hours;
+	minute = _minutes;
 	if (gender)
-		time_know_m = time_know;
+		time_know_m = hour;
 	else
-		time_know_w = time_know;
+		time_know_w = hour;
+	/*
 	if (time_know)
 	{
 		printf("hour= ");
@@ -33,6 +41,7 @@ void print_input_form()
 		printf("minute= ");
 		scanf("%d", &minute);
 	}
+	*/
 }
 
 int cal_type_sign(int s)
@@ -159,13 +168,13 @@ void cal_type_gs_m()
 
 int print_h(char *id1, char *id2)
 {
-	printf("%s and %s is h\n", id1, id2);
+	//printf("%s and %s is h\n", id1, id2);
 	return (2);
 }
 
 int print_c(char *id1, char *id2)
 {
-	printf("%s and %s is c\n", id1, id2);
+	//printf("%s and %s is c\n", id1, id2);
 	return (1);
 }
 
@@ -563,111 +572,111 @@ void cal_type_yn()
 	printf("\ntype yn = SN");
 }
 
-int cal_type_result()
+const char* cal_type_result()
 {
 	switch(type_gs)
 	{
 		case 0: //mv
 			if (type_sign*type_hc*type_yn == 1)
-				return (1); // 1 1 1
+				return ("1"); // 1 1 1
 			else if (type_sign*type_hc == 1)
-				return (2); // 1 1 0
+				return ("2"); // 1 1 0
 			else if (type_sign*type_yn == 1)
-				return (3); // 1 0 1
+				return ("3"); // 1 0 1
 			else if (type_hc*type_yn == 1)
-				return (4); // 0 1 1
+				return ("4"); // 0 1 1
 			else if (type_sign == 1)
-				return (5); // 1 0 0
+				return ("5"); // 1 0 0
 			else if (type_hc == 1)
-				return (6); // 0 1 0
+				return ("6"); // 0 1 0
 			else if (type_yn == 1)
-				return (7); // 0 0 1
+				return ("7"); // 0 0 1
 			else 
-				return (8); // 0 0 0
+				return ("8"); // 0 0 0
 		case 1: //mi
 			if (type_sign*type_hc*type_yn == 1)
-				return (9); // 1 1 1
+				return ("9"); // 1 1 1
 			else if (type_sign*type_hc == 1)
-				return (10); // 1 1 0
+				return ("10"); // 1 1 0
 			else if (type_sign*type_yn == 1)
-				return (11); // 1 0 1
+				return ("11"); // 1 0 1
 			else if (type_hc*type_yn == 1)
-				return (12); // 0 1 1
+				return ("12"); // 0 1 1
 			else if (type_sign == 1)
-				return (13); // 1 0 0
+				return ("13"); // 1 0 0
 			else if (type_hc == 1)
-				return (14); // 0 1 0
+				return ("14"); // 0 1 0
 			else if (type_yn == 1)
-				return (15); // 0 0 1
+				return ("15"); // 0 0 1
 			else 
-				return (16); // 0 0 0
+				return ("16"); // 0 0 0
 		case 2: //mo
 			if (type_sign*type_hc*type_yn == 1)
-				return (17); // 1 1 1
+				return ("17"); // 1 1 1
 			else if (type_sign*type_hc == 1)
-				return (18); // 1 1 0
+				return ("18"); // 1 1 0
 			else if (type_sign*type_yn == 1)
-				return (19); // 1 0 1
+				return ("19"); // 1 0 1
 			else if (type_hc*type_yn == 1)
-				return (20); // 0 1 1
+				return ("20"); // 0 1 1
 			else if (type_sign == 1)
-				return (21); // 1 0 0
+				return ("21"); // 1 0 0
 			else if (type_hc == 1)
-				return (22); // 0 1 0
+				return ("22"); // 0 1 0
 			else if (type_yn == 1)
-				return (23); // 0 0 1
+				return ("23"); // 0 0 1
 			else 
-				return (24); // 0 0 0
+				return ("24"); // 0 0 0
 		case 3: //mn
 			if (type_sign*type_hc*type_yn == 1)
-				return (25); // 1 1 1
+				return ("25"); // 1 1 1
 			else if (type_sign*type_hc == 1)
-				return (26); // 1 1 0
+				return ("26"); // 1 1 0
 			else if (type_sign*type_yn == 1)
-				return (27); // 1 0 1
+				return ("27"); // 1 0 1
 			else if (type_hc*type_yn == 1)
-				return (28); // 0 1 1
+				return ("28"); // 0 1 1
 			else if (type_sign == 1)
-				return (29); // 1 0 0
+				return ("29"); // 1 0 0
 			else if (type_hc == 1)
-				return (30); // 0 1 0
+				return ("30"); // 0 1 0
 			else if (type_yn == 1)
-				return (31); // 0 0 1
+				return ("31"); // 0 0 1
 			else 
-				return (32); // 0 0 0
+				return ("32"); // 0 0 0
 		case 4: //me
 			if (type_sign*type_hc*type_yn == 1)
-				return (33); // 1 1 1
+				return ("33"); // 1 1 1
 			else if (type_sign*type_hc == 1)
-				return (34); // 1 1 0
+				return ("34"); // 1 1 0
 			else if (type_sign*type_yn == 1)
-				return (35); // 1 0 1
+				return ("35"); // 1 0 1
 			else if (type_hc*type_yn == 1)
-				return (36); // 0 1 1
+				return ("36"); // 0 1 1
 			else if (type_sign == 1)
-				return (37); // 1 0 0
+				return ("37"); // 1 0 0
 			else if (type_hc == 1)
-				return (38); // 0 1 0
+				return ("38"); // 0 1 0
 			else if (type_yn == 1)
-				return (39); // 0 0 1
+				return ("39"); // 0 0 1
 			else 
-				return (40); // 0 0 0
+				return ("40"); // 0 0 0
 		case 5: //ml
 			if (type_sign*type_hc*type_yn == 1)
-				return (41); // 1 1 1
+				return ("41"); // 1 1 1
 			else if (type_sign*type_hc == 1)
-				return (42); // 1 1 0
+				return ("42"); // 1 1 0
 			else if (type_sign*type_yn == 1)
-				return (43); // 1 0 1
+				return ("43"); // 1 0 1
 			else if (type_hc*type_yn == 1)
-				return (44); // 0 1 1
+				return ("44"); // 0 1 1
 			else if (type_sign == 1)
-				return (45); // 1 0 0
+				return ("45"); // 1 0 0
 			else if (type_hc == 1)
-				return (46); // 0 1 0
+				return ("46"); // 0 1 0
 			else if (type_yn == 1)
-				return (47); // 0 0 1
+				return ("47"); // 0 0 1
 			else 
-				return (48); // 0 0 0
+				return ("48"); // 0 0 0
 	}
 }
