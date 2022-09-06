@@ -18,7 +18,7 @@ int _4week(int wgender, int wyear, int wmonth, int wday, int whours, int wminute
 	month=5;
 	timez_off=-540;
 	month_flag = 0;
-	flag = 0;
+	flag = 0; // 처음 입력인지 아닌지
 
 	time_t ltime;
 	struct tm *today,*gmt_time;
@@ -42,11 +42,11 @@ int _4week(int wgender, int wyear, int wmonth, int wday, int whours, int wminute
 	timez_off=getminbytime(gmt_time->tm_year+1900,gmt_time->tm_mon+1,gmt_time->tm_mday ,gmt_time->tm_hour,gmt_time->tm_min,
 			cur_time.year,cur_time.month,cur_time.day ,cur_time.hour,cur_time.min);
 
-  int i,in_st_no ;
-  int cnt;
-  char *buf;
-  char *tmp;
-  char *d[20];
+	int i,in_st_no ;
+	int cnt;
+	char *buf;
+	char *tmp;
+	char *d[20];
 	int time_year_system=1;
 	type_result1 = (char*)malloc(sizeof(char)*3);
 	type_result2 = (char*)malloc(sizeof(char)*3);
@@ -92,7 +92,7 @@ int _4week(int wgender, int wyear, int wmonth, int wday, int whours, int wminute
 	cal_satis_hc1();
 	cal_satis_hc2();
 	cal_satis_gh();
-	satis_result = cal_satis_result();
-	printf("\nsatis result = %d", satis_result);
+	//satis_result = cal_satis_result();
+	//printf("\nsatis result = %d", satis_result);
 	return(0);
 }

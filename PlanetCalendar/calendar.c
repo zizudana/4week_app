@@ -399,7 +399,7 @@ void print_month_table()
 	int line;
 	//printf("year=%d month=%d day=%d\n", year, month, day);
 	printf("year=%s month=%s ",ganji[mid_gi_8.so24year],ganji[mid_gi_8.so24month]);
-	if (gender)
+	if (flag)
 	{
 		strncpy(saju2[0],ganji[mid_gi_8.so24year],4);
 		strncpy(saju2[1],ganji[mid_gi_8.so24month],4);
@@ -465,7 +465,7 @@ void print_month_table()
 		}
 	}
 	printf("day=%s ", ganji[day_value[day-1][TYPE_S60_Day]] );
-	if (gender)
+	if (flag)
 		strncpy(saju2[2], ganji[day_value[day-1][TYPE_S60_Day]], 4);
 	else
 		strncpy(saju[2], ganji[day_value[day-1][TYPE_S60_Day]], 4);

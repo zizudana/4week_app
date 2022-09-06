@@ -241,7 +241,7 @@ void cal_satis_hc2()
     {
       strncpy(id2, saju2[j]+2, 2);
       id2[2] = '\0';
-      printf("id1 = %s id2 = %s\n", id1, id2);
+      //printf("id1 = %s id2 = %s\n", id1, id2);
       cnt = is_jj_hc(id1, id2);
       if (cnt == 2)
         h++;

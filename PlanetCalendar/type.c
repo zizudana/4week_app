@@ -3,13 +3,9 @@
 void print_input_form(int _gender, int _year, int _month, int _day, int _hours, int _minutes)
 {
 	//default
-	year = 2022;
-	month = 4;
-	day = 7;
-	hour = 15;
 	minute = 0;
 	gender = 0; // 남자 1 여자 0
-	int time_know = 0;
+	int time_know = 1;
 
 	/*사용자 입력
 	printf("year= ");
@@ -402,14 +398,14 @@ void cal_type_hc()
 	{
 		for (i=0; i<3; i++)
 		{
-			if (gender)
+			if (flag)
 				strncpy(id1, saju2[i], 2);
 			else
 				strncpy(id1, saju[i], 2);
 			id1[2] = '\0';
 			for (j=i+1; j<4; j++)
 			{
-				if (gender)
+				if (flag)
 					strncpy(id2, saju2[j], 2);
 				else
 					strncpy(id2, saju[j], 2);
@@ -424,14 +420,14 @@ void cal_type_hc()
 
 		for (i=0; i<3; i++)
 		{
-			if (gender)
+			if (flag)
 				strncpy(id1, saju2[i]+2, 2);
 			else
 				strncpy(id1, saju[i]+2, 2);
 			id1[2] = '\0';
 			for (j=i+1; j<4; j++)
 			{
-				if (gender)
+				if (flag)
 					strncpy(id2, saju2[j]+2, 2);
 				else
 					strncpy(id2, saju[j]+2, 2);
@@ -447,12 +443,12 @@ void cal_type_hc()
 
 	else // 시간을 모를때
 	{
-		if (gender)
+		if (flag)
 			strncpy(id1, saju2[0], 2);
 		else
 			strncpy(id1, saju[0], 2);
 		id1[2] = '\0';
-		if (gender)
+		if (flag)
 			strncpy(id2, saju2[1], 2);
 		else
 			strncpy(id2, saju[1], 2);
@@ -465,14 +461,14 @@ void cal_type_hc()
 
 		for (i=0; i<2; i++)
 		{
-			if (gender)
+			if (flag)
 				strncpy(id1, saju2[i]+2, 2);
 			else
 				strncpy(id1, saju[i]+2, 2);
 			id1[2] = '\0';
 			for (j=i+1; j<3; j++)
 			{
-				if (gender)
+				if (flag)
 					strncpy(id2, saju2[j]+2, 2);
 				else
 					strncpy(id2, saju[j]+2, 2);
@@ -504,7 +500,7 @@ void cal_type_yn()
 	char id2[3]; //월지
 	char id3[3]; //일지
 
-	if (gender)
+	if (flag)
 	{
 		strncpy(id1, saju2[2], 2); //일간
 		id1[2] = '\0';
