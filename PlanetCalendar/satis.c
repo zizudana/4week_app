@@ -1,28 +1,28 @@
-#include "main.h"
+#include "4week.h"
 
 void cal_satis_jung()
 {
-  int w, m;
-  w = cal_type_sign(0);
-  m = cal_type_sign(1);
+  int p1, p2;
+  p1 = cal_type_sign(0);
+  p2 = cal_type_sign(1);
 
   printf("-----------------------------\n");
-  if (w == 0 && m == 1)
+  if (p1 == 0 && p2 == 1)
   {
     satis_jung = 0;
     printf("1. HA\n");
   }
-  else if (w == 1 && m == 0)
+  else if (p1 == 1 && p2 == 0)
   {
     satis_jung = 1;
     printf("1. AH\n");
   }
-  else if (w == 0 && m == 0)
+  else if (p1 == 0 && p2 == 0)
   {
     satis_jung = 2;
     printf("1. 2N\n");
   }
-  else if (w == 1 && m == 1)
+  else if (p1 == 1 && p2 == 1)
   {
     satis_jung = 3;
     printf("1. 2P\n");
@@ -63,9 +63,9 @@ void cal_satis_dowha()
   int wm; //여->남
   int mw; //남->여
 
-  strncpy(w1, saju[1]+2, 2);
+  strncpy(w1, saju1[1]+2, 2);
   w1[2] = '\0';
-  strncpy(i1, saju[2]+2, 2);
+  strncpy(i1, saju1[2]+2, 2);
   i1[2] = '\0';
   strncpy(w2, saju2[1]+2, 2);
   w2[2] = '\0';
@@ -133,7 +133,7 @@ void cal_satis_guin()
   int wm; //여->남
   int mw; //남->여
 
-  strncpy(c, saju[2], 2);
+  strncpy(c, saju1[2], 2);
   c[2] = '\0';
   strncpy(z1, saju2[1]+2, 2);
   z1[2] = '\0';
@@ -143,9 +143,9 @@ void cal_satis_guin()
 
   strncpy(c, saju2[2], 2);
   c[2] = '\0';
-  strncpy(z1, saju[1]+2, 2);
+  strncpy(z1, saju1[1]+2, 2);
   z1[2] = '\0';
-  strncpy(z2, saju[2]+2, 2);
+  strncpy(z2, saju1[2]+2, 2);
   z2[2] = '\0';
   wm = is_guin(c, z1, z2);
 
@@ -177,7 +177,7 @@ void cal_satis_hc1()
   char w[3];
   int hc;
 
-  strncpy(w, saju[2], 2);
+  strncpy(w, saju1[2], 2);
   w[2] = '\0';
   strncpy(m, saju2[2], 2);
   m[2] = '\0';
@@ -219,7 +219,7 @@ void cal_satis_hc2()
   ch = 0;
   for (i=0; i<idx_w; i++)
   {
-    strncpy(id1, saju[i], 2);
+    strncpy(id1, saju1[i], 2);
     id1[2] = '\0';
     for (j=0; j<idx_m; j++)
     {
@@ -235,7 +235,7 @@ void cal_satis_hc2()
 
   for (i=0; i<idx_w; i++)
   {
-    strncpy(id1, saju[i]+2, 2);
+    strncpy(id1, saju1[i]+2, 2);
     id1[2] = '\0';
     for (j=0; j<idx_m; j++)
     {
@@ -277,9 +277,9 @@ void cal_satis_gh()
   int gp = 0;
   satis_gh = 0;
 
-  strncpy(m1, saju[1]+2, 2);
+  strncpy(m1, saju1[1]+2, 2);
   m1[2] = '\0';
-  strncpy(d1, saju[2]+2, 2);
+  strncpy(d1, saju1[2]+2, 2);
   d1[2] = '\0';
   strncpy(m2, saju2[1]+2, 2);
   m2[2] = '\0';

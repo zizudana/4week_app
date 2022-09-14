@@ -1,10 +1,9 @@
 <!-- form.html -->
 
 {{ if .Success }}
-  <h1>Result</h1>
-  <div>{{.}}</div>
+  <a href="/">HOME</a>
 {{ else }}
-  <h1>생년월일 입력</h1>
+  <!--<h1>생년월일 입력</h1>-->
   <div>
   <form method="POST">
     <div style="border:1px; float:left; margin-right:10px;">
@@ -17,9 +16,11 @@
       <label>Day:</label><br />
       <input type="text" name="Day1"><br />
       <label>Hours:</label><br />
-      <input type="text" name="Hous1"><br />
+      <input type="text" name="Hours1"><br />
       <label>Minutes:</label><br />
       <input type="text" name="Minutes1"><br />
+      <label>Know Time?:</label><br />
+      <input type="text" name="Tknow1"><br />
     </div>
     <div style="border:1px;">
       <label>Gender:</label><br />
@@ -31,9 +32,11 @@
       <label>Day:</label><br />
       <input type="text" name="Day2"><br />
       <label>Hours:</label><br />
-      <input type="text" name="Hous2"><br />
+      <input type="text" name="Hours2"><br />
       <label>Minutes:</label><br />
       <input type="text" name="Minutes2"><br />
+      <label>Know Time?:</label><br />
+      <input type="text" name="Tknow2"><br />
     </div>
     <div style="margin-top: 10px;"><input type="submit"></div>
   </form>

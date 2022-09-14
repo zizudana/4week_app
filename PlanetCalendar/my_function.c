@@ -1,4 +1,4 @@
-#include "main.h"
+#include "4week.h"
 
 
 // 시간조견표 
@@ -49,7 +49,7 @@ void print_time_table()
 	if (flag)
 		strncpy(id, saju2[2], 2);
 	else
-		strncpy(id, saju[2], 2);
+		strncpy(id, saju1[2], 2);
 	id[2] = '\0';
 	if (hour == 23)
 	{
@@ -100,10 +100,10 @@ void print_time_table()
 	if (flag)
 		strncpy(saju2[3], time_table[id_x][id_y], 4);
 	else
-		strncpy(saju[3], time_table[id_x][id_y], 4);
+		strncpy(saju1[3], time_table[id_x][id_y], 4);
 }
 
-
+/*
 void print_twelve_star()
 {
 	char id[3]; // 일천간
@@ -162,7 +162,7 @@ void print_twelve_star()
 	}
 	printf("\n");
 }
-
+*/
 
 int six_sin_x(char id[])
 {
@@ -219,7 +219,6 @@ int six_sin_y(char id[])
 	return (id_y);
 }
 
-
 void print_six_sin()
 {
 	char id1[3];
@@ -232,7 +231,7 @@ void print_six_sin()
 	if (flag)
 		strncpy(id1, saju2[2], 2); //일천간
 	else
-		strncpy(id1, saju[2], 2);
+		strncpy(id1, saju1[2], 2);
 	id1[2] = '\0';
 	id_x = six_sin_x(id1);
 	cnt = 0;
@@ -241,7 +240,7 @@ void print_six_sin()
 		if (flag)
 			strncpy(id2, saju2[i]+2, 2);
 		else
-			strncpy(id2, saju[i]+2, 2);
+			strncpy(id2, saju1[i]+2, 2);
 		id2[2] = '\0';
 		id_y = six_sin_y(id2);
 		strncpy(six_chin[cnt], six_sin[id_x][id_y], 2);
@@ -252,7 +251,7 @@ void print_six_sin()
 		if (flag)
 			strncpy(id2, saju2[i], 2);
 		else
-			strncpy(id2, saju[i], 2);
+			strncpy(id2, saju1[i], 2);
 		id2[2] = '\0';
 		id_y = six_sin_y(id2);
 		strncpy(six_chin[cnt], six_sin[id_x][id_y], 2);
@@ -261,7 +260,7 @@ void print_six_sin()
 	if (flag)
 		strncpy(id2, saju2[3], 2); //일천+시천
 	else
-		strncpy(id2, saju[3], 2); //일천+시천
+		strncpy(id2, saju1[3], 2); //일천+시천
 	id2[2] = '\0';
 	id_y = six_sin_y(id2);
 	strncpy(six_chin[cnt], six_sin[id_x][id_y], 2);
@@ -270,13 +269,13 @@ void print_six_sin()
 	if (flag)
 		strncpy(id1, saju2[3], 2); //시천+년천
 	else
-		strncpy(id1, saju[3], 2); //시천+년천
+		strncpy(id1, saju1[3], 2); //시천+년천
 	id1[2] = '\0';
 	id_x = six_sin_x(id1);
 	if (flag)
 		strncpy(id2, saju2[0], 2);
 	else
-		strncpy(id2, saju[0], 2);
+		strncpy(id2, saju1[0], 2);
 	id2[2] = '\0';
 	id_y = six_sin_y(id2);
 	strncpy(six_chin[cnt], six_sin[id_x][id_y], 2);
@@ -290,7 +289,7 @@ void print_six_sin()
 		printf("%s ", six_chin[i]);
 	printf("\n-----------------------------");
 }
-
+/*
 void print_great_fortune(int direction)
 {
 	int i;
@@ -439,3 +438,4 @@ void great_six_chin()
 		printf("%s ", gf_six_ji[i]);
 	printf("\n-----------------------------");
 }
+*/

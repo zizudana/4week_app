@@ -1,4 +1,4 @@
-#include "main.h"
+#include "4week.h"
 /*
 void print_month_info()
 {
@@ -11,14 +11,13 @@ void print_month_info()
 }
 */
 
-int _4week(int wgender, int wyear, int wmonth, int wday, int whours, int wminutes, int mgender, int myear, int mmonth, int mday, int mhours, int mminutes)
+char* _4week(int gender1, int year1, int month1, int day1, int hours1, int minutes1, int tknow1, int gender2, int year2, int month2, int day2, int hours2, int minutes2, int tknow2)
 {
 	//default
-	year=2016;
-	month=5;
+	year=2022;
+	month=9;
 	timez_off=-540;
 	month_flag = 0;
-	flag = 0; // 처음 입력인지 아닌지
 
 	time_t ltime;
 	struct tm *today,*gmt_time;
@@ -48,17 +47,19 @@ int _4week(int wgender, int wyear, int wmonth, int wday, int whours, int wminute
 	char *tmp;
 	char *d[20];
 	int time_year_system=1;
+	flag = 0; // 처음 입력인지 아닌지
 	type_result1 = (char*)malloc(sizeof(char)*3);
 	type_result2 = (char*)malloc(sizeof(char)*3);
-
-	print_body_first(wgender, wyear, wmonth, wday, whours, wminutes); //input 실행
+	result = (char*)malloc(sizeof(char)*12);
+	print_body_first(gender1, year1, month1, day1, hours1, minutes1, tknow1); //input 실행
 	print_month_table(); // 일주계산, saju[2]
 	print_time_table(); // 시주계산, saju[3]
 	//print_twelve_star();
 	print_six_sin();
 	//calculate_great_foutune();
 	//great_six_chin();
-	cal_type_sign(gender); // 양음 계산, type_sign
+	cal_type_sign(flag); // 양음 계산, type_sign
+	printf("\ntype sign = %d", type_sign);
 	if (gender) //남자
 		cal_type_gs_m(); // 관성 계산
 	else //여자
@@ -69,14 +70,15 @@ int _4week(int wgender, int wyear, int wmonth, int wday, int whours, int wminute
 	printf("\ntype1 = %s\n", type_result1);
 
 	flag = 1;
-	print_body_first(mgender, myear, mmonth, mday, mhours, mminutes); //input 실행
+	print_body_first(gender2, year2, month2, day2, hours2, minutes2, tknow2); //input 실행
 	print_month_table(); // 일주계산, saju[2]
 	print_time_table(); // 시주계산, saju[3]
 	//print_twelve_star();
 	print_six_sin();
 	//calculate_great_foutune();
 	//great_six_chin();
-	cal_type_sign(gender); // 양음 계산, type_sign
+	cal_type_sign(flag); // 양음 계산, type_sign
+	printf("\ntype sign = %d", type_sign);
 	if (gender) //남자
 		cal_type_gs_m(); // 관성 계산
 	else //여자
@@ -94,5 +96,9 @@ int _4week(int wgender, int wyear, int wmonth, int wday, int whours, int wminute
 	cal_satis_gh();
 	//satis_result = cal_satis_result();
 	//printf("\nsatis result = %d", satis_result);
-	return(0);
+	strcpy(result, type_result1);
+	strcat(result, type_result2);
+	strcat(result, "A");
+	printf("\nResult = %s\n", result);
+	return(result);
 }

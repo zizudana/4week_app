@@ -1,11 +1,13 @@
-#include "main.h"
+#include "4week.h"
 
+/*
 void print_input_form(int _gender, int _year, int _month, int _day, int _hours, int _minutes)
 {
 	//default
-	minute = 0;
 	gender = 0; // 남자 1 여자 0
-	int time_know = 1;
+	hour = 0;
+	minute = 0;
+	//int time_know = 1;
 
 	/*사용자 입력
 	printf("year= ");
@@ -18,18 +20,18 @@ void print_input_form(int _gender, int _year, int _month, int _day, int _hours, 
 	scanf("%d", &gender);
 	printf("know the time? 1 or 0");
 	scanf("%d", &time_know);
-	*/
+	
 	gender = _gender;
 	year = _year;
 	month = _month;
 	day = _day;
 	hour = _hours;
 	minute = _minutes;
+
 	if (gender)
 		time_know_m = hour;
 	else
 		time_know_w = hour;
-	/*
 	if (time_know)
 	{
 		printf("hour= ");
@@ -38,17 +40,18 @@ void print_input_form(int _gender, int _year, int _month, int _day, int _hours, 
 		scanf("%d", &minute);
 	}
 	*/
-}
+//}
 
-int cal_type_sign(int s)
+
+int cal_type_sign(int flag)
 { // 양 음
 	char id[3];
 	type_sign = 1;
 
-	if (s)
+	if (flag)
 		strncpy(id, saju2[2], 2); 
 	else
-		strncpy(id, saju[2], 2);
+		strncpy(id, saju1[2], 2);
 	id[2] = '\0';
 	if (!strcmp(id, "ga") || !strcmp(id, "by") || !strcmp(id, "mu") || !strcmp(id, "gy") || !strcmp(id, "im"))
 		type_sign = 1; // 양
@@ -401,14 +404,14 @@ void cal_type_hc()
 			if (flag)
 				strncpy(id1, saju2[i], 2);
 			else
-				strncpy(id1, saju[i], 2);
+				strncpy(id1, saju1[i], 2);
 			id1[2] = '\0';
 			for (j=i+1; j<4; j++)
 			{
 				if (flag)
 					strncpy(id2, saju2[j], 2);
 				else
-					strncpy(id2, saju[j], 2);
+					strncpy(id2, saju1[j], 2);
 				id2[2] = '\0';
 				cnt = is_cg_hc(id1, id2);
 				if (cnt == 2)
@@ -423,14 +426,14 @@ void cal_type_hc()
 			if (flag)
 				strncpy(id1, saju2[i]+2, 2);
 			else
-				strncpy(id1, saju[i]+2, 2);
+				strncpy(id1, saju1[i]+2, 2);
 			id1[2] = '\0';
 			for (j=i+1; j<4; j++)
 			{
 				if (flag)
 					strncpy(id2, saju2[j]+2, 2);
 				else
-					strncpy(id2, saju[j]+2, 2);
+					strncpy(id2, saju1[j]+2, 2);
 				id2[2] = '\0';
 				cnt = is_jj_hc(id1, id2);
 				if (cnt == 2)
@@ -446,12 +449,12 @@ void cal_type_hc()
 		if (flag)
 			strncpy(id1, saju2[0], 2);
 		else
-			strncpy(id1, saju[0], 2);
+			strncpy(id1, saju1[0], 2);
 		id1[2] = '\0';
 		if (flag)
 			strncpy(id2, saju2[1], 2);
 		else
-			strncpy(id2, saju[1], 2);
+			strncpy(id2, saju1[1], 2);
 		id2[2] = '\0';
 		cnt = is_cg_hc(id1, id2);
 		if (cnt == 2)
@@ -464,14 +467,14 @@ void cal_type_hc()
 			if (flag)
 				strncpy(id1, saju2[i]+2, 2);
 			else
-				strncpy(id1, saju[i]+2, 2);
+				strncpy(id1, saju1[i]+2, 2);
 			id1[2] = '\0';
 			for (j=i+1; j<3; j++)
 			{
 				if (flag)
 					strncpy(id2, saju2[j]+2, 2);
 				else
-					strncpy(id2, saju[j]+2, 2);
+					strncpy(id2, saju1[j]+2, 2);
 				id2[2] = '\0';
 				cnt = is_jj_hc(id1, id2);
 				if (cnt == 2)
@@ -511,11 +514,11 @@ void cal_type_yn()
 	}
 	else
 	{
-		strncpy(id1, saju[2], 2); //일간
+		strncpy(id1, saju1[2], 2); //일간
 		id1[2] = '\0';
-		strncpy(id2, saju[1]+2, 2); //월지
+		strncpy(id2, saju1[1]+2, 2); //월지
 		id2[2] = '\0';
-		strncpy(id3, saju[2]+2, 2); //일지
+		strncpy(id3, saju1[2]+2, 2); //일지
 		id3[2] = '\0';
 	}
 
@@ -574,24 +577,24 @@ const char* cal_type_result()
 	{
 		case 0: //mv
 			if (type_sign*type_hc*type_yn == 1)
-				return ("1"); // 1 1 1
+				return ("01"); // 1 1 1
 			else if (type_sign*type_hc == 1)
-				return ("2"); // 1 1 0
+				return ("02"); // 1 1 0
 			else if (type_sign*type_yn == 1)
-				return ("3"); // 1 0 1
+				return ("03"); // 1 0 1
 			else if (type_hc*type_yn == 1)
-				return ("4"); // 0 1 1
+				return ("04"); // 0 1 1
 			else if (type_sign == 1)
-				return ("5"); // 1 0 0
+				return ("05"); // 1 0 0
 			else if (type_hc == 1)
-				return ("6"); // 0 1 0
+				return ("06"); // 0 1 0
 			else if (type_yn == 1)
-				return ("7"); // 0 0 1
+				return ("07"); // 0 0 1
 			else 
-				return ("8"); // 0 0 0
+				return ("08"); // 0 0 0
 		case 1: //mi
 			if (type_sign*type_hc*type_yn == 1)
-				return ("9"); // 1 1 1
+				return ("09"); // 1 1 1
 			else if (type_sign*type_hc == 1)
 				return ("10"); // 1 1 0
 			else if (type_sign*type_yn == 1)

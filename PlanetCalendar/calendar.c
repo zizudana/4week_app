@@ -1,4 +1,4 @@
-#include "main.h"
+#include "4week.h"
 
 void check_planet_event_month(int wbyear, int wbmonth, int time_offset_chkevent)
 {
@@ -109,7 +109,7 @@ void check_planet_event_month(int wbyear, int wbmonth, int time_offset_chkevent)
 	} // for(int tmin=0;tmin<(local_duration+1);)
 }
 
-void print_body_first(int _gender, int _year, int _month, int _day, int _hours, int _minutes)
+void print_body_first(int _gender, int _year, int _month, int _day, int _hours, int _minutes, int _tknow)
 {
 	int pyear,pmonth,nmonth,nyear;
 
@@ -141,7 +141,19 @@ void print_body_first(int _gender, int _year, int _month, int _day, int _hours, 
 	if (less_year==-10000) less_year=-9999;
 	int more_year=year+1;
 	if (more_year==10000) less_year=9999;
-	print_input_form(_gender, _year, _month, _day, _hours, _minutes);
+	//print_input_form(_gender, _year, _month, _day, _hours, _minutes);
+	gender = _gender;
+	year = _year;
+	month = _month;
+	day = _day;
+	hour = _hours;
+	minute = _minutes;
+	time_know = _tknow;
+	if (gender)
+		time_know_m = time_know;
+	else
+		time_know_w = time_know;
+
 }
 
 void print_month_table()
@@ -406,8 +418,8 @@ void print_month_table()
 	}
 	else
 	{
-		strncpy(saju[0],ganji[mid_gi_8.so24year],4);
-		strncpy(saju[1],ganji[mid_gi_8.so24month],4);
+		strncpy(saju1[0],ganji[mid_gi_8.so24year],4);
+		strncpy(saju1[1],ganji[mid_gi_8.so24month],4);
 	}
 
 	for(line=1;line<7;line++)
@@ -468,7 +480,7 @@ void print_month_table()
 	if (flag)
 		strncpy(saju2[2], ganji[day_value[day-1][TYPE_S60_Day]], 4);
 	else
-		strncpy(saju[2], ganji[day_value[day-1][TYPE_S60_Day]], 4);
+		strncpy(saju1[2], ganji[day_value[day-1][TYPE_S60_Day]], 4);
 }
 
 int calculate_day(int y, int m, int d)
