@@ -1,12 +1,12 @@
 package main
 
 /*
-#include "cal_calculation.c"
-#include "calendar.c"
+#include "4week.c"
 #include "my_function.c"
 #include "type.c"
 #include "satis.c"
-#include "4week.c"
+#include "cal_calculation.c"
+#include "calendar.c"
 */
 import "C"
 import (

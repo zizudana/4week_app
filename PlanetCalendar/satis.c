@@ -250,7 +250,7 @@ void cal_satis_hc2()
     }
   }
   
-  if (h > ch)
+  if (h >= ch)
   {
     satis_hc2 = 0;
     printf("5. HM");

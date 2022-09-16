@@ -59,7 +59,10 @@ char* _4week(int gender1, int year1, int month1, int day1, int hours1, int minut
 	//calculate_great_foutune();
 	//great_six_chin();
 	cal_type_sign(flag); // 양음 계산, type_sign
-	printf("\ntype sign = %d", type_sign);
+	if (type_sign)
+		printf("type sign = P");
+	else
+		printf("type sign = M");
 	if (gender) //남자
 		cal_type_gs_m(); // 관성 계산
 	else //여자
@@ -68,6 +71,7 @@ char* _4week(int gender1, int year1, int month1, int day1, int hours1, int minut
 	cal_type_yn(); //민감도 계산
 	strcpy(type_result1, cal_type_result());
 	printf("\ntype1 = %s\n", type_result1);
+	printf("-----------------------------\n");
 
 	flag = 1;
 	print_body_first(gender2, year2, month2, day2, hours2, minutes2, tknow2); //input 실행
@@ -78,7 +82,10 @@ char* _4week(int gender1, int year1, int month1, int day1, int hours1, int minut
 	//calculate_great_foutune();
 	//great_six_chin();
 	cal_type_sign(flag); // 양음 계산, type_sign
-	printf("\ntype sign = %d", type_sign);
+	if (type_sign)
+		printf("type sign = P");
+	else
+		printf("type sign = M");
 	if (gender) //남자
 		cal_type_gs_m(); // 관성 계산
 	else //여자

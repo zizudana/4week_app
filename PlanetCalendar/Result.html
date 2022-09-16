@@ -13,20 +13,26 @@
 <body>
     <div style="width:90%; display:flex; margin:10px auto;">
         <div class="type">
-            <h3>여자 Type</h3>
-            {{printf "%s" .Body1}}
+            <div style="padding:10px;">
+                <h3>여자 Type</h3>
+                {{printf "%s" .Body1}}
+            </div>
+        </div>
+
+
+        <div class="type" style="border-right: dashed; border-left: dashed">
+            <div style="padding:10px;">
+                <h3>남자 Type</h3>
+                {{printf "%s" .Body2}}
+            </div>
         </div>
 
 
         <div class="type">
-            <h3>남자 Type</h3>
-            {{printf "%s" .Body2}}
-        </div>
-
-
-        <div class="type">
-            <h3>만족도</h3>
-            {{printf "%s" .Body3}}
+            <div style="padding:10px;">
+                <h3>만족도</h3>
+                {{printf "%s" .Body3}}
+            </div>
         </div>
     </div>
     <p style="float: right; margin-right:10%;"><a href="/">돌아가기</a></p>

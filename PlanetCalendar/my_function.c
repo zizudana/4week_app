@@ -280,14 +280,14 @@ void print_six_sin()
 	id_y = six_sin_y(id2);
 	strncpy(six_chin[cnt], six_sin[id_x][id_y], 2);
 	six_chin[cnt++][3] = '\0';
-	printf("-----------------------------\n");
+	/*printf("-----------------------------\n");
 	printf("<six chin>\n");
 	for (i=4; i<8; i++)
 		printf("%s ", six_chin[i]);
 	printf("\n");
 	for(i=0; i<4; i++)
 		printf("%s ", six_chin[i]);
-	printf("\n-----------------------------");
+	printf("\n-----------------------------");*/
 }
 /*
 void print_great_fortune(int direction)
